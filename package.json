@@ -1,0 +1,77 @@
+{
+  "name": "nestjs-keycloak-admin",
+  "version": "1.0.0",
+  "description": "Keycloak Admin Provider for Nest.js",
+  "author": "Yagiz Nizipli <yagiz@relevantfruit.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*",
+    "*.md"
+  ],
+  "scripts": {
+    "start:dev": "tsc -w",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "keywords": [
+    "nestjs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/relevantfruit/nestjs-admin-provider"
+  },
+  "bugs": "https://github.com/relevantfruit/nestjs-admin-provider",
+  "peerDependencies": {
+    "@nestjs/common": "^7.1.3"
+  },
+  "dependencies": {
+    "keycloak-admin": "^1.13.0",
+    "openid-client": "^3.15.2",
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^7.1.3",
+    "@nestjs/core": "^7.1.3",
+    "@nestjs/platform-express": "^7.1.3",
+    "@nestjs/testing": "7.1.3",
+    "@types/axios": "^0.14.0",
+    "@types/express": "4.17.6",
+    "@types/jest": "26.0.0",
+    "@types/node": "14.0.13",
+    "@types/supertest": "2.0.9",
+    "jest": "26.0.1",
+    "prettier": "2.0.5",
+    "supertest": "4.0.2",
+    "ts-jest": "26.1.0",
+    "ts-node": "8.10.2",
+    "tsc-watch": "4.2.8",
+    "tsconfig-paths": "3.9.0",
+    "tslint": "6.1.2",
+    "typescript": "3.9.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
