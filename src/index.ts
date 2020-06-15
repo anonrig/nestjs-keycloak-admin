@@ -1,7 +1,7 @@
-import * as Provider from './module';
+import { KeycloakAdminModule } from './module';
 
 export * from './constants';
 export * from './interfaces';
 export * from './service';
 
-export default Provider;
+export default KeycloakAdminModule;
