@@ -1,5 +1,4 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
-import KeycloakAdmin from 'keycloak-admin';
 import { KEYCLOAK_ADMIN_OPTIONS } from './constants';
 import {
   KeycloakAdminModuleAsyncOptions,
@@ -8,10 +7,7 @@ import {
 } from './interfaces';
 import { KeycloakAdminService } from './service';
 
-@Module({
-  providers: [KeycloakAdminService],
-  exports: [KeycloakAdminService],
-})
+@Module({})
 export class KeycloakAdminModule {
   public static register(opts: KeycloakAdminOptions): DynamicModule {
     const optsProvider = {
@@ -76,12 +72,8 @@ export class KeycloakAdminModule {
 
   private static keycloakProvider: Provider = {
     provide: KeycloakAdminService,
-    useFactory: async ({ config, credentials }: KeycloakAdminOptions) => {
-      const client = new KeycloakAdmin(config);
-
-      await client.auth(credentials);
-
-      return client;
+    useFactory: async (options: KeycloakAdminOptions) => {
+      return new KeycloakAdminService(options);
     },
     inject: [KEYCLOAK_ADMIN_OPTIONS],
   };
