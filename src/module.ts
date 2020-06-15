@@ -1,4 +1,4 @@
-import { DynamicModule, Module, Provider } from '@nestjs/common';
+import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 import { KEYCLOAK_ADMIN_OPTIONS } from './constants';
 import {
   KeycloakAdminModuleAsyncOptions,
@@ -6,7 +6,11 @@ import {
 } from './interfaces';
 import { KeycloakAdminService } from './service';
 
-@Module({})
+@Global()
+@Module({
+  providers: [KeycloakAdminService],
+  exports: [KeycloakAdminService],
+})
 export class KeycloakAdminModule {
   public static register(options: KeycloakAdminOptions): DynamicModule {
     const provider = this.getOptionsProvider(options);
