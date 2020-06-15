@@ -43,6 +43,7 @@
   "dependencies": {
     "keycloak-admin": "^1.13.0",
     "openid-client": "^3.15.2",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.5"
   },
   "devDependencies": {
