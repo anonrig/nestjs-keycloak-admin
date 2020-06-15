@@ -3,78 +3,54 @@ import { KEYCLOAK_ADMIN_OPTIONS } from './constants';
 import {
   KeycloakAdminModuleAsyncOptions,
   KeycloakAdminOptions,
-  KeycloakAdminOptionsFactory,
 } from './interfaces';
 import { KeycloakAdminService } from './service';
 
 @Module({})
 export class KeycloakAdminModule {
-  public static register(opts: KeycloakAdminOptions): DynamicModule {
-    const optsProvider = {
-      provide: KEYCLOAK_ADMIN_OPTIONS,
-      useValue: opts,
-    };
-
+  public static register(options: KeycloakAdminOptions): DynamicModule {
+    const provider = this.getOptionsProvider(options);
     return {
       module: KeycloakAdminModule,
-      providers: [optsProvider, this.keycloakProvider],
-      exports: [optsProvider, this.keycloakProvider],
+      providers: [provider, this.keycloakProvider],
+      exports: [provider, this.keycloakProvider],
     };
   }
 
   public static registerAsync(
-    opts: KeycloakAdminModuleAsyncOptions,
+    options: KeycloakAdminModuleAsyncOptions,
   ): DynamicModule {
-    const optsProvider = this.createAdminProviders(opts);
+    const customOptions = this.getCustomOptions(options);
 
     return {
       module: KeycloakAdminModule,
-      imports: opts.imports || [],
-      providers: [optsProvider, this.keycloakProvider],
-      exports: [optsProvider, this.keycloakProvider],
+      imports: options.imports || [],
+      providers: [customOptions, this.keycloakProvider],
+      exports: [customOptions, this.keycloakProvider],
     };
   }
 
-  private static createAdminProviders(
+  private static getCustomOptions(
     options: KeycloakAdminModuleAsyncOptions,
   ): Provider {
-    if (options.useExisting || options.useFactory) {
-      return this.createAdminOptionsProvider(options);
-    }
-
-    // useClass
-    return {
-      provide: options.useClass,
-      useClass: options.useClass,
-    };
-  }
-
-  private static createAdminOptionsProvider(
-    options: KeycloakAdminModuleAsyncOptions,
-  ): Provider {
-    if (options.useFactory) {
-      // useFactory
-      return {
-        provide: KEYCLOAK_ADMIN_OPTIONS,
-        useFactory: options.useFactory,
-        inject: options.inject || [],
-      };
-    }
-
-    // useExisting
     return {
       provide: KEYCLOAK_ADMIN_OPTIONS,
-      useFactory: async (optionsFactory: KeycloakAdminOptionsFactory) =>
-        await optionsFactory.createKeycloakAdminOptions(),
-      inject: [options.useExisting || options.useClass],
+      useFactory: options.useFactory,
+      inject: options.inject || [],
     };
   }
 
   private static keycloakProvider: Provider = {
     provide: KeycloakAdminService,
-    useFactory: async (options: KeycloakAdminOptions) => {
-      return new KeycloakAdminService(options);
-    },
+    useFactory: (options: KeycloakAdminOptions) =>
+      new KeycloakAdminService(options),
     inject: [KEYCLOAK_ADMIN_OPTIONS],
   };
+
+  private static getOptionsProvider(options: KeycloakAdminOptions): Provider {
+    return {
+      provide: KEYCLOAK_ADMIN_OPTIONS,
+      useValue: options,
+    };
+  }
 }

@@ -1,12 +1,10 @@
-import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
-import { AxiosRequestConfig } from 'axios';
+import { ModuleMetadata } from '@nestjs/common/interfaces';
+import { ConnectionConfig } from 'keycloak-admin/lib/client';
 
 export interface KeycloakAdminModuleAsyncOptions
   extends Pick<ModuleMetadata, 'imports'> {
   inject?: any[];
-  useExisting?: Type<KeycloakAdminOptionsFactory>;
-  useClass?: Type<KeycloakAdminOptionsFactory>;
-  useFactory?: (
+  useFactory: (
     ...args: any[]
   ) => Promise<KeycloakAdminOptions> | KeycloakAdminOptions;
 }
@@ -15,12 +13,6 @@ export interface KeycloakAdminOptionsFactory {
   createKeycloakAdminOptions():
     | Promise<KeycloakAdminOptions>
     | KeycloakAdminOptions;
-}
-
-export interface ConnectionConfig {
-  baseUrl?: string;
-  realmName?: string;
-  requestConfig?: AxiosRequestConfig;
 }
 
 export interface Credentials {
@@ -32,6 +24,6 @@ export interface Credentials {
 }
 
 export interface KeycloakAdminOptions {
-  config?: ConnectionConfig;
+  config: ConnectionConfig;
   credentials: Credentials;
 }
