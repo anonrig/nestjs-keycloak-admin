@@ -1,20 +1,22 @@
 import { Logger } from '@nestjs/common';
 import AdminClient from 'keycloak-admin';
-import { Client, GrantBody, Issuer, TokenSet } from 'openid-client';
+import { Client, Issuer, TokenSet } from 'openid-client';
 import { KeycloakAdminOptions } from './interfaces';
+import { ResourceManager } from './lib/resource-manager';
 
 export class KeycloakAdminService {
   private logger = new Logger(KeycloakAdminService.name);
 
-  private options: KeycloakAdminOptions;
-  private client: AdminClient;
-  private tokenSet: TokenSet | null | undefined;
-  private issuerClient: Client | null | undefined;
-  private connectionConfig: GrantBody & any;
+  public readonly options: KeycloakAdminOptions;
+  private tokenSet?: TokenSet;
+  private issuerClient?: Client;
+  public resourceManager: ResourceManager;
+  public client: AdminClient;
 
   constructor(options: KeycloakAdminOptions) {
     this.options = options;
     this.client = new AdminClient(options.config);
+    this.resourceManager = new ResourceManager(this);
     this.initConnection();
   }
 
@@ -27,9 +29,6 @@ export class KeycloakAdminService {
       grantType: 'client_credentials',
     } as any);
 
-    if (!this.options.config.baseUrl) {
-      throw new Error(`Base url is missing from options.`);
-    }
     const keycloakIssuer = await Issuer.discover(this.options.config.jwtIssuer);
 
     this.issuerClient = new keycloakIssuer.Client({
@@ -46,46 +45,20 @@ export class KeycloakAdminService {
     this.logger.log(
       `Initial token expires at ${new Date(this.tokenSet.expires_at!)}`,
     );
-
-    this.initRefresh();
   }
 
-  async initRefresh() {
-    // Periodically using refresh_token grant flow to get new access token here
-    // TODO: it will be better to check for token expiration instead of interval check
-    setInterval(async () => {
-      const tokenSet = this.tokenSet;
+  async refreshGrant(): Promise<TokenSet> {
+    if (this.tokenSet && !this.tokenSet.expired()) {
+      return this.tokenSet;
+    }
 
-      if (!tokenSet || !tokenSet?.refresh_token) {
-        return this.logger.warn(
-          'Refresh token is missing. Refresh doesnt work.',
-        );
-      }
+    this.logger.verbose(`Grant token expired, refreshing.`);
 
-      if (!tokenSet.expired()) {
-        return this.logger.verbose(`Omitting refreshing of Keycloak token.`);
-      }
+    this.tokenSet = await this.issuerClient?.refresh(
+      this.tokenSet!.refresh_token!,
+    );
 
-      try {
-        this.tokenSet = await this.issuerClient?.refresh(
-          tokenSet.refresh_token,
-        );
-        this.logger.log('Successfully refreshed token');
-      } catch (e) {
-        if (e.name === 'TimeoutError' || e?.error === 'invalid_grant') {
-          this.tokenSet = await this.issuerClient?.grant(this.connectionConfig);
-        } else {
-          this.logger.error(e);
-          throw e;
-        }
-      }
-      if (this.tokenSet?.access_token) {
-        this.client.setAccessToken(this.tokenSet.access_token);
-      }
-    }, 58 * 1000); // 58 seconds
-  }
-
-  getClient() {
-    return this.client;
+    this.client.setAccessToken(this.tokenSet!.access_token!);
+    return this.tokenSet!;
   }
 }
