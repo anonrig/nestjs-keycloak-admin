@@ -20,7 +20,6 @@ export interface Credentials {
 }
 
 export interface KeycloakAdminConfig {
-  jwtIssuer: string;
   baseUrl: string;
   realmName: string;
 }

@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import AdminClient from 'keycloak-admin';
 import { Client, Issuer, TokenSet } from 'openid-client';
+import { resolve } from 'url';
 import { KeycloakAdminOptions } from './interfaces';
 import { ResourceManager } from './lib/resource-manager';
 
@@ -29,7 +30,12 @@ export class KeycloakAdminService {
       grantType: 'client_credentials',
     } as any);
 
-    const keycloakIssuer = await Issuer.discover(this.options.config.jwtIssuer);
+    const keycloakIssuer = await Issuer.discover(
+      resolve(
+        this.options.config.baseUrl,
+        `/realms/${this.options.config.realmName}`,
+      ),
+    );
 
     this.issuerClient = new keycloakIssuer.Client({
       client_id: clientId,
