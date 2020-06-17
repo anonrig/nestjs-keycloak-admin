@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { resolve } from 'url';
 import { KeycloakAdminService } from '../service';
 
 export class RequestManager {
@@ -10,7 +11,7 @@ export class RequestManager {
 
     const { baseUrl, realmName } = this.client.options.config;
     this.requester = Axios.create({
-      baseURL: `${baseUrl}/auth/realms/${realmName}`,
+      baseURL: resolve(baseUrl, `/realms/${realmName}`),
     });
 
     this.requester.interceptors.request.use(async (config) => {
