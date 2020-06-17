@@ -13,7 +13,6 @@ Then on your app.module.ts
           config: {
             baseUrl: 'https://relevantfruit.com/auth',
             realmName: 'relevant-fruit',
-            jwtIssuer: 'https://relevantfruit.com/auth/realms/relevant-fruit'
           },
           credentials: {
             clientId: 'batman',

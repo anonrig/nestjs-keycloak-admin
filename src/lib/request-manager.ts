@@ -11,7 +11,7 @@ export class RequestManager {
 
     const { baseUrl, realmName } = this.client.options.config;
     this.requester = Axios.create({
-      baseURL: resolve(baseUrl, `/realms/${realmName}`),
+      baseURL: resolve(baseUrl, `/auth/realms/${realmName}`),
     });
 
     this.requester.interceptors.request.use(async (config) => {

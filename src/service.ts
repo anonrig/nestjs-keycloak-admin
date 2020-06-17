@@ -39,7 +39,7 @@ export class KeycloakAdminService {
     const keycloakIssuer = await Issuer.discover(
       resolve(
         this.options.config.baseUrl,
-        `/realms/${this.options.config.realmName}`,
+        `/auth/realms/${this.options.config.realmName}`,
       ),
     );
 
