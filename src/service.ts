@@ -15,6 +15,12 @@ export class KeycloakAdminService {
   public client: AdminClient;
 
   constructor(options: KeycloakAdminOptions) {
+    if (!options.config.baseUrl.startsWith('http')) {
+      throw new Error(
+        `Invalid base url. It should start with either http or https.`,
+      );
+    }
+
     this.options = options;
     this.client = new AdminClient(options.config);
     this.resourceManager = new ResourceManager(this);
