@@ -1,17 +1,17 @@
-import { UMAScopeOptions } from '../interfaces';
+import { UMAScopeOptions } from '../interfaces'
 
 export class UMAScope {
-  private readonly options: UMAScopeOptions;
+  private readonly options: UMAScopeOptions
 
   constructor(opts: UMAScopeOptions) {
-    this.options = opts;
+    this.options = opts
   }
 
-  isEqual(rhs: UMAScope) {
-    return this.toJson().name === rhs.toJson().name;
+  isEqual(rhs: UMAScope): boolean {
+    return this.toJson().name === rhs.toJson().name
   }
 
-  toJson() {
-    return this.options;
+  toJson(): UMAScopeOptions {
+    return this.options
   }
 }

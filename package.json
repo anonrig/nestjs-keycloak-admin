@@ -13,6 +13,9 @@
     "*.md"
   ],
   "scripts": {
+    "style": "run-s style:*",
+    "style:format": "prettier --write \"src/**/*.ts\"",
+    "style:lint": "eslint src --ext .js,.ts --fix",
     "start:dev": "tsc -w",
     "clean": "rimraf dist",
     "build": "run-s clean && run-p build:*",
@@ -20,7 +23,8 @@
     "build:module": "tsc -p tsconfig.module.json",
     "prepare": "npm run snyk-protect && npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "snyk-protect": "snyk protect"
+    "snyk-protect": "snyk protect",
+    "release": "semantic-release"
   },
   "keywords": [
     "nestjs"
@@ -44,13 +48,29 @@
     "openid-client": "^3.15.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@nestjs/common": "^7.1.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/axios": "^0.14.0",
     "@types/node": "14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
+    "@typescript-eslint/parser": "^3.2.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "3.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
     "npm-run-all": "^4.1.5",
     "prettier": "2.0.5",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
+    "semantic-release": "^17.0.8",
     "snyk": "^1.342.2",
     "ts-node": "8.10.2",
     "tsc-watch": "4.2.8",

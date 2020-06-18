@@ -1,7 +1,13 @@
-import { KeycloakAdminModule } from './module';
+import { KeycloakAdminModule } from './module'
 
-export * from './constants';
-export * from './interfaces';
-export * from './service';
+export * from './lib/request-manager'
+export * from './lib/resource-manager'
 
-export default KeycloakAdminModule;
+export * from './uma/resource'
+export * from './uma/scope'
+
+export * from './constants'
+export * from './interfaces'
+export * from './service'
+
+export default KeycloakAdminModule
