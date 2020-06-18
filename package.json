@@ -18,13 +18,9 @@
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
-    "prepare": "npm run build",
+    "prepare": "npm run snyk-protect && npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "snyk-protect": "snyk protect"
   },
   "keywords": [
     "nestjs"
@@ -55,9 +51,11 @@
     "prettier": "2.0.5",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
+    "snyk": "^1.342.2",
     "ts-node": "8.10.2",
     "tsc-watch": "4.2.8",
     "tsconfig-paths": "3.9.0",
     "typescript": "3.9.5"
-  }
+  },
+  "snyk": true
 }
