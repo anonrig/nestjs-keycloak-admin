@@ -23,19 +23,3 @@ export interface KeycloakAdminOptions {
   config: KeycloakAdminConfig
   credentials: Credentials
 }
-
-export interface UMAScopeOptions {
-  name: string
-  id?: string
-  iconUri?: string
-}
-
-export interface UMAResourceOptions {
-  name: string
-  id?: string
-  uri?: string
-  type?: string
-  iconUri?: string
-  owner?: string
-  scopes?: string[] | UMAScopeOptions[]
-}
