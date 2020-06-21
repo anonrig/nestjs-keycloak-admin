@@ -21,6 +21,10 @@ Then on your app.module.ts
         }),
         inject: [ConfigService]
       }),
+    ],
+    providers: [
+      { provide: APP_GUARD, useClass: AuthGuard },
+      { provide: APP_GUARD, useClass: ResourceGuard }  
     ]
   })
 ```
@@ -30,21 +34,66 @@ Then on your app.module.ts
 By default nestjs-keycloak-admin supports User Managed Access for managing your resources.
 
 ```typescript
-class Organization() {
+@Controller()
+@DefineResource('organization')
+class OrganizationController() {
   constructor(private readonly adminProvider: KeycloakAdminService) {}
 
-  async findAll(): UMAResource[] {
-    return this.adminProvider.resourceManager.findAll()
+  @Get('/hello')
+  @Public()
+  hello(): string {
+    return 'life is short'
   }
 
-  async create(payload: payload): Promise<UMAResource> {
-    const resource = new UMAResource(payload)
-      .setOwner(1)
-      .addScope('organization:create')
-      .setType('organization')
-      .setUri('/organization/123')
+  @Get('/)
+  @FetchResources()
+  findAll(@Request('resources'): Resource[]): Resource[] {
+    return resources
+  }
 
-    return this.adminProvider.create(resource)
+  @Get('/:id')
+  @DefineScope('read') // this will check organization:read permission
+  @DefineResourceEnforcer({
+    id: (req: any) => req.params.id
+  })
+  findOne(@Request('resource'): Resource): Resource) {
+    return resource
+  }
+
+  @Get('/slug/:slug')
+  @DefineScope('read')
+  @DefineResourceEnforcer({
+    id: async (req: any, context: ExecutionContext) => {
+      const class = context.getClass<OrganizationController>()
+      const org = await class.typeormProvider.findBySlug(req.params.slug)
+      return org.keycloakId
+    }
+  })
+  findBySlug(@Request('resource'): Resource): Resource) {
+    return resource
+  }
+
+  @Post('/')
+  @DefineScope('create')
+  async create((): Promise<Resource> {
+    let resource = new Resource({
+      name: 'resource',
+      displayName: 'My Resource'
+    })
+      .setOwner(1)
+      .addScopes([new Scope('organization:read'), new Scope('organization:write')])
+      .setType('urn:resource-server:type:organization')
+      .setUri('/organization/123')
+      .setAttributes({
+        valid: true,
+        types: ['customer', 'any']
+      })
+
+    resource = await this.adminProvider.create(resource)
+
+    // create organization on your resource server and add link to resource.id, to access it later.
+
+    return resource 
   }
 }
 ```

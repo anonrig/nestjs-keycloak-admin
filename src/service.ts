@@ -2,15 +2,21 @@ import { Logger, InternalServerErrorException } from '@nestjs/common'
 import AdminClient from 'keycloak-admin'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
-import { KeycloakAdminOptions } from './interfaces'
 import { ResourceManager } from './lib/resource-manager'
+import { PermissionManager } from './lib/permission-manager'
+import { KeycloakAdminOptions } from './@types/package'
+import KeycloakConnect, { Keycloak } from 'keycloak-connect'
+import { nextTick } from 'process'
 
 export class KeycloakAdminService {
   private logger = new Logger(KeycloakAdminService.name)
 
-  public readonly options: KeycloakAdminOptions
   private tokenSet?: TokenSet
   private issuerClient?: Client
+
+  public readonly options: KeycloakAdminOptions
+  public connect: Keycloak
+  public permissionManager: PermissionManager
   public resourceManager: ResourceManager
   public client: AdminClient
 
@@ -18,14 +24,36 @@ export class KeycloakAdminService {
     if (!options.config.baseUrl.startsWith('http')) {
       throw new Error(`Invalid base url. It should start with either http or https.`)
     }
-
     this.options = options
-    this.client = new AdminClient(options.config)
+
+    this.initializeConnect()
+    this.initializeAdmin()
+
     this.resourceManager = new ResourceManager(this)
-    this.initConnection()
+    this.permissionManager = new PermissionManager(this)
   }
 
-  async initConnection(): Promise<void> {
+  private initializeConnect(): void {
+    const keycloak: any = new KeycloakConnect({}, {
+      resource: this.options.credentials.clientId,
+      realm: this.options.config.realmName,
+      'confidential-port': 0,
+      'ssl-required': 'all',
+      'auth-server-url': resolve(this.options.config.baseUrl, '/auth'),
+      secret: this.options.credentials.clientSecret,
+    } as any)
+
+    keycloak.accessDenied = (req: any, res: any, next: any) => {
+      req.accessDenied = true
+      next()
+    }
+
+    this.connect = keycloak as Keycloak
+  }
+
+  private async initializeAdmin(): Promise<void> {
+    this.client = new AdminClient(this.options.config)
+
     const { clientId, clientSecret } = this.options.credentials
 
     await this.client.auth({

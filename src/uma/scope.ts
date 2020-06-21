@@ -1,17 +1,29 @@
-import { UMAScopeOptions } from '../interfaces'
+import { UMAScope } from '../@types/uma'
 
-export class UMAScope {
-  private readonly options: UMAScopeOptions
+export class Scope {
+  private name: string
+  private id?: string
+  private iconUri?: string
 
-  constructor(opts: UMAScopeOptions) {
-    this.options = opts
+  constructor(scope: string | UMAScope) {
+    if (typeof scope === 'string') {
+      this.name = scope
+    } else {
+      this.name = scope.name
+      this.id = scope.id
+      this.iconUri = scope.icon_uri
+    }
   }
 
-  isEqual(rhs: UMAScope): boolean {
-    return this.toJson().name === rhs.toJson().name
+  isEqual(rhs: Scope): boolean {
+    return this.name === rhs.name
   }
 
-  toJson(): UMAScopeOptions {
-    return this.options
+  toJson(): UMAScope {
+    return {
+      name: this.name,
+      id: this.id,
+      icon_uri: this.iconUri,
+    }
   }
 }
