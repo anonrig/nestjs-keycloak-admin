@@ -1,8 +1,9 @@
-import { DynamicModule, Module, Provider } from '@nestjs/common'
+import { DynamicModule, Module, Provider, Global } from '@nestjs/common'
 import { KEYCLOAK_ADMIN_OPTIONS } from './constants'
 import { KeycloakService } from './service'
 import { KeycloakModuleOptions, KeycloakModuleAsyncOptions } from './@types/package'
 
+@Global()
 @Module({
   providers: [KeycloakService],
   exports: [KeycloakService],
