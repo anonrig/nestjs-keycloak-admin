@@ -1,4 +1,4 @@
-import { SetMetadata, CustomDecorator, ExecutionContext, Request } from '@nestjs/common'
+import { SetMetadata, CustomDecorator, ExecutionContext } from '@nestjs/common'
 
 export const META_RESOURCE_ENFORCER = 'keycloak-resource-enforcer'
 
@@ -12,5 +12,5 @@ export interface ResourceDecoratorOptions {
 }
 
 export interface ResourceDecoratorReq {
-  (req: Request, context: ExecutionContext): Promise<string> | string
+  (req: any, context: ExecutionContext): Promise<string> | string
 }
