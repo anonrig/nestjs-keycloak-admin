@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.0...v1.2.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **resource-enforcer:** fix request reference ([2117b38](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/2117b38d4cccb61d927fe7944806b282644b8f50))
+
 # [1.2.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.1.5...v1.2.0) (2020-06-22)
 
 
