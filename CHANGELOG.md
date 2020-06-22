@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.1.5...v1.2.0) (2020-06-22)
+
+
+### Features
+
+* add example project and update readme ([bd7dedb](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/bd7dedb30c513caca8c9155691a963f75adfea9e))
+* implement connect functionality and rewrite the project ([89f0265](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/89f02655511452ccc3597e6d6344be13599fdde2))
+
 ## [1.1.5](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.1.4...v1.1.5) (2020-06-18)
 
 
