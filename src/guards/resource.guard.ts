@@ -13,7 +13,11 @@ import {
   META_RESOURCE_ENFORCER,
 } from '../decorators/resource.enforcer.decorator'
 import { META_SCOPE } from '../decorators/scope.decorator'
-import { TicketResponseMode, TicketPermissionResponse, TicketDecisionResponse } from '../@types/uma.ticket'
+import {
+  TicketResponseMode,
+  TicketPermissionResponse,
+  TicketDecisionResponse,
+} from '../@types/uma.ticket'
 import { META_RESOURCE } from '../decorators/resource.decorator'
 import { META_FETCH_RESOURCES } from '../decorators/fetch.resources.decorator'
 import { META_PUBLIC } from '../decorators/public.decorator'
@@ -79,7 +83,7 @@ export class ResourceGuard implements CanActivate {
         throw new UnauthorizedException()
       }
 
-      const [{scopes, rsid}] = response as TicketPermissionResponse[]
+      const [{ scopes, rsid }] = response as TicketPermissionResponse[]
       request.scopes = scopes
       request.resource = await this.keycloak.resourceManager.findById(rsid)
       return true
@@ -107,11 +111,11 @@ export class ResourceGuard implements CanActivate {
 
   private async fetchResources(request: any) {
     try {
-      const response = await this.keycloak.permissionManager.requestTicket({
+      const response = (await this.keycloak.permissionManager.requestTicket({
         token: request.accessToken as string,
         audience: this.keycloak.options.credentials.clientId,
         response_mode: TicketResponseMode.permissions,
-      }) as TicketPermissionResponse[]
+      })) as TicketPermissionResponse[]
 
       request.resources = await Promise.all(
         response.map((r: TicketPermissionResponse) =>

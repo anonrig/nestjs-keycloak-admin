@@ -12,10 +12,7 @@ export class ResourceManager {
   }
 
   async create(resource: Resource): Promise<Resource> {
-    const { data } = await this.requestManager.post<UMAResource>(
-      '/',
-      resource.toJson()
-    )
+    const { data } = await this.requestManager.post<UMAResource>('/', resource.toJson())
 
     if (data._id) {
       resource.setId(data._id)
@@ -27,10 +24,7 @@ export class ResourceManager {
   async update(resource: Resource): Promise<Resource> {
     if (!resource.id) throw new Error(`Id is missing from resource`)
 
-    await this.requestManager.put<any>(
-      `/${resource.id}`,
-      resource.toJson()
-    )
+    await this.requestManager.put<any>(`/${resource.id}`, resource.toJson())
 
     return resource
   }

@@ -5,7 +5,7 @@ import { KeycloakModuleOptions, KeycloakModuleAsyncOptions } from './@types/pack
 
 @Module({
   providers: [KeycloakService],
-  exports: [KeycloakService]
+  exports: [KeycloakService],
 })
 export class KeycloakModule {
   public static register(options: KeycloakModuleOptions): DynamicModule {
