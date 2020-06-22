@@ -58,7 +58,9 @@ export class KeycloakService {
       return
     }
     const { clientId, clientSecret } = this.options.credentials
-    const { data } = await this.requestManager.get<UMAConfiguration>('/.well-known/uma2-configuration')
+    const { data } = await this.requestManager.get<UMAConfiguration>(
+      '/.well-known/uma2-configuration'
+    )
     this.umaConfiguration = data
 
     this.resourceManager = new ResourceManager(this, data.resource_registration_endpoint)

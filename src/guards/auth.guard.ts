@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     @Inject(KeycloakService)
     private keycloak: KeycloakService,
-    private readonly reflector: Reflector,
+    private readonly reflector: Reflector
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
