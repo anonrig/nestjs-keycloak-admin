@@ -1,22 +1,26 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { resolve } from 'url'
-import { KeycloakAdminService } from '../service'
+import { KeycloakService } from '../service'
+import { Logger } from '@nestjs/common'
 
 export class RequestManager {
+  private logger = new Logger(RequestManager.name)
   private requester: AxiosInstance
-  private readonly client: KeycloakAdminService
+  private readonly client: KeycloakService
 
-  constructor(client: KeycloakAdminService) {
+  constructor(client: KeycloakService, baseURL: string) {
     this.client = client
-
-    const { baseUrl, realmName } = this.client.options.config
-    this.requester = Axios.create({
-      baseURL: resolve(baseUrl, `/auth/realms/${realmName}`),
-    })
-
+    this.requester = Axios.create({ baseURL })
     this.requester.interceptors.request.use(async (config) => {
-      const tokenSet = await this.client.refreshGrant()
-      config.headers.authorization = `Bearer ${tokenSet?.access_token}`
+      if (config.headers.authorization) {
+        return config
+      }
+
+      try {
+        const tokenSet = await this.client.refreshGrant()
+        config.headers.authorization = `Bearer ${tokenSet?.access_token}`
+      } catch (error) {
+        this.logger.warn(`Could not refresh grant on interceptor.`, error)
+      }
       return config
     })
   }

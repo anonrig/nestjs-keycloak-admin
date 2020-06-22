@@ -4,34 +4,38 @@ import {
   ExecutionContext,
   UnauthorizedException,
   Logger,
+  Inject,
 } from '@nestjs/common'
-import { KeycloakAdminService } from '../service'
+import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
 import { META_PUBLIC } from '../decorators/public.decorator'
+import { KeycloakUser } from '../@types/user'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  private logger = new Logger(AuthGuard.name)
+  logger = new Logger(AuthGuard.name)
 
   constructor(
-    private readonly keycloak: KeycloakAdminService,
-    private readonly reflector: Reflector
+    @Inject(KeycloakService)
+    private keycloak: KeycloakService,
+    private readonly reflector: Reflector,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    if (this.reflector.get<boolean>(META_PUBLIC, context.getHandler())) {
+    const isPublic: boolean = this.reflector.get<boolean>(META_PUBLIC, context.getHandler())
+
+    if (isPublic) {
       return true
     }
 
     const request = context.switchToHttp().getRequest()
-
     const jwt = this.extractJwt(request.headers)
 
     try {
       const result = await this.keycloak.connect.grantManager.validateAccessToken(jwt)
 
       if (typeof result === 'string') {
-        request.user = await this.keycloak.connect.grantManager.userInfo(jwt)
+        request.user = await this.keycloak.connect.grantManager.userInfo<string, KeycloakUser>(jwt)
         request.accessToken = jwt
         return true
       }

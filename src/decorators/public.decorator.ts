@@ -1,10 +1,6 @@
 import { SetMetadata, CustomDecorator } from '@nestjs/common'
 
-export const META_PUBLIC = 'public'
+export const META_PUBLIC = 'keycloak-public'
 
-/**
- * Alias for `@Unprotected`.
- * @since 1.2.0
- */
-
-export const Public = (): CustomDecorator => SetMetadata(META_PUBLIC, true)
+export const Public = (): CustomDecorator<string> => 
+  SetMetadata<string, boolean>(META_PUBLIC, true)

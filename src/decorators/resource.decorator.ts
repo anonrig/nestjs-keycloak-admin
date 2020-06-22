@@ -1,10 +1,6 @@
 import { SetMetadata, CustomDecorator } from '@nestjs/common'
 
-export const META_RESOURCE = 'resource'
+export const META_RESOURCE = 'keycloak-resource'
 
-/**
- * Keycloak resource.
- * @param resource
- */
-export const DefineResource = (resource: string): CustomDecorator =>
-  SetMetadata(META_RESOURCE, resource)
+export const DefineResource = (resource: string): CustomDecorator<string> => 
+  SetMetadata<string, string>(META_RESOURCE, resource)
