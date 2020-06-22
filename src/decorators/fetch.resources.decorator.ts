@@ -1,9 +1,6 @@
 import { SetMetadata, CustomDecorator } from '@nestjs/common'
 
-export const META_FETCH_RESOURCES = 'fetch-resources'
+export const META_FETCH_RESOURCES = 'keycloak-fetch-resources'
 
-/**
- * Keycloak resource.
- * @param resource
- */
-export const FetchResources = (): CustomDecorator => SetMetadata(META_FETCH_RESOURCES, true)
+export const FetchResources = (): CustomDecorator<string> => 
+  SetMetadata<string, boolean>(META_FETCH_RESOURCES, true)

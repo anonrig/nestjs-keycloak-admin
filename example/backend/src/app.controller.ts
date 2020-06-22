@@ -1,48 +1,4 @@
-## Keycloak Admin Client for NestJs
-
-Install using `npm i --save nestjs-keycloak-admin` or `yarn add nestjs-keycloak-admin`
-
-
-## Initialize KeycloakModule
-
-Then on your app.module.ts
-
-```typescript
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import KeycloakModule, { AuthGuard, ResourceGuard } from 'nestjs-keycloak-admin'
-import { APP_GUARD } from '@nestjs/core';
-
-@Module({
-  imports: [
-    KeycloakModule.register({
-      config: {
-        baseUrl: '',
-        realmName: ''
-      },
-      credentials: {
-        clientSecret: '',
-        clientId: ''
-      }
-    })
-  ],
-  controllers: [AppController],
-  providers: [
-    {
-      provide: APP_GUARD, 
-      useClass: AuthGuard
-    },
-    {provide: APP_GUARD, useClass: ResourceGuard},
-  ],
-})
-export class AppModule {}
-```
-
-### Resource Management using User Managed Access (UMA)
-
-By default nestjs-keycloak-admin supports User Managed Access for managing your resources.
-
-```typescript
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Get, Request, ExecutionContext, Post } from '@nestjs/common';
 import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, DefineResourceEnforcer, UMAResource, Scope} from '../../../dist/main';
 
@@ -109,4 +65,3 @@ export class AppController {
     return resource 
   }
 }
-```

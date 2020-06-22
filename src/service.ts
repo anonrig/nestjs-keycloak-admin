@@ -1,39 +1,38 @@
-import { Logger, InternalServerErrorException } from '@nestjs/common'
+import { Logger, InternalServerErrorException, Global } from '@nestjs/common'
 import AdminClient from 'keycloak-admin'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
 import { ResourceManager } from './lib/resource-manager'
 import { PermissionManager } from './lib/permission-manager'
-import { KeycloakAdminOptions } from './@types/package'
+import { KeycloakModuleOptions } from './@types/package'
 import KeycloakConnect, { Keycloak } from 'keycloak-connect'
-import { nextTick } from 'process'
+import { RequestManager } from './lib/request-manager'
+import { UMAConfiguration } from './@types/uma'
 
-export class KeycloakAdminService {
-  private logger = new Logger(KeycloakAdminService.name)
+@Global()
+export class KeycloakService {
+  private logger = new Logger(KeycloakService.name)
 
   private tokenSet?: TokenSet
   private issuerClient?: Client
 
-  public readonly options: KeycloakAdminOptions
+  private baseUrl: string
+  private requestManager: RequestManager
+  public umaConfiguration?: UMAConfiguration
+  public readonly options: KeycloakModuleOptions
+
   public connect: Keycloak
-  public permissionManager: PermissionManager
-  public resourceManager: ResourceManager
+  public permissionManager!: PermissionManager
+  public resourceManager!: ResourceManager
   public client: AdminClient
 
-  constructor(options: KeycloakAdminOptions) {
+  constructor(options: KeycloakModuleOptions) {
     if (!options.config.baseUrl.startsWith('http')) {
       throw new Error(`Invalid base url. It should start with either http or https.`)
     }
     this.options = options
+    this.baseUrl = resolve(options.config.baseUrl, `/auth/realms/${options.config.realmName}`)
 
-    this.initializeConnect()
-    this.initializeAdmin()
-
-    this.resourceManager = new ResourceManager(this)
-    this.permissionManager = new PermissionManager(this)
-  }
-
-  private initializeConnect(): void {
     const keycloak: any = new KeycloakConnect({}, {
       resource: this.options.credentials.clientId,
       realm: this.options.config.realmName,
@@ -43,18 +42,27 @@ export class KeycloakAdminService {
       secret: this.options.credentials.clientSecret,
     } as any)
 
-    keycloak.accessDenied = (req: any, res: any, next: any) => {
+    keycloak.accessDenied = (req: any, _res: any, next: any) => {
       req.accessDenied = true
       next()
     }
 
     this.connect = keycloak as Keycloak
-  }
-
-  private async initializeAdmin(): Promise<void> {
     this.client = new AdminClient(this.options.config)
 
+    this.requestManager = new RequestManager(this, this.baseUrl)
+  }
+
+  async initialize(): Promise<void> {
+    if (this.umaConfiguration) {
+      return
+    }
     const { clientId, clientSecret } = this.options.credentials
+    const { data } = await this.requestManager.get<UMAConfiguration>('/.well-known/uma2-configuration')
+    this.umaConfiguration = data
+
+    this.resourceManager = new ResourceManager(this, data.resource_registration_endpoint)
+    this.permissionManager = new PermissionManager(this, data.token_endpoint)
 
     await this.client.auth({
       clientId,
@@ -62,9 +70,7 @@ export class KeycloakAdminService {
       grantType: 'client_credentials',
     } as any)
 
-    const keycloakIssuer = await Issuer.discover(
-      resolve(this.options.config.baseUrl, `/auth/realms/${this.options.config.realmName}`)
-    )
+    const keycloakIssuer = await Issuer.discover(data.issuer)
 
     this.issuerClient = new keycloakIssuer.Client({
       client_id: clientId,
@@ -82,13 +88,14 @@ export class KeycloakAdminService {
     }
   }
 
-  async refreshGrant(): Promise<TokenSet | undefined> {
+  async refreshGrant(): Promise<TokenSet | undefined | null> {
     if (this.tokenSet && !this.tokenSet.expired()) {
       return this.tokenSet
     }
 
     if (!this.tokenSet) {
-      throw new InternalServerErrorException(`Token set is missing. Could not refresh grant.`)
+      this.logger.error(`Token set is missing. Could not refresh grant.`)
+      return null
     }
 
     const { refresh_token } = this.tokenSet
@@ -96,7 +103,8 @@ export class KeycloakAdminService {
     this.logger.verbose(`Grant token expired, refreshing.`)
 
     if (!refresh_token) {
-      throw new InternalServerErrorException(`Could not refresh token. Refresh token is missing.`)
+      this.logger.error(`Could not refresh token. Refresh token is missing.`)
+      return null
     }
 
     this.tokenSet = await this.issuerClient?.refresh(refresh_token)

@@ -1,9 +1,10 @@
-import { KeycloakAdminModule } from './module'
+import { KeycloakModule } from './module'
 
 export * from './@types/package'
 export * from './@types/resource'
 export * from './@types/uma'
 export * from './@types/uma.ticket'
+export * from './@types/user'
 
 export * from './decorators/fetch.resources.decorator'
 export * from './decorators/public.decorator'
@@ -27,4 +28,4 @@ export * from './uma/scope'
 export * from './constants'
 export * from './service'
 
-export default KeycloakAdminModule
+export default KeycloakModule

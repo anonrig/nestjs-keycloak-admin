@@ -1,12 +1,12 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces'
 
-export interface KeycloakAdminModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
+export interface KeycloakModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
   inject?: any[]
-  useFactory: (...args: any[]) => Promise<KeycloakAdminOptions> | KeycloakAdminOptions
+  useFactory: (...args: any[]) => Promise<KeycloakModuleOptions> | KeycloakModuleOptions
 }
 
-export interface KeycloakAdminOptionsFactory {
-  createKeycloakAdminOptions(): Promise<KeycloakAdminOptions> | KeycloakAdminOptions
+export interface KeycloakOptionsFactory {
+  createKeycloakOptions(): Promise<KeycloakModuleOptions> | KeycloakModuleOptions
 }
 
 export interface Credentials {
@@ -14,12 +14,12 @@ export interface Credentials {
   clientSecret: string
 }
 
-export interface KeycloakAdminConfig {
+export interface KeycloakConfig {
   baseUrl: string
   realmName: string
 }
 
-export interface KeycloakAdminOptions {
-  config: KeycloakAdminConfig
+export interface KeycloakModuleOptions {
+  config: KeycloakConfig
   credentials: Credentials
 }
