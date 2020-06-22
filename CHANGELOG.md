@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.2...v1.2.3) (2020-06-22)
+
+
+### Bug Fixes
+
+* **module:** make module global ([ae69c97](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/ae69c978e06438c4110bc44816ee62997c8f5b08))
+
 ## [1.2.2](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.1...v1.2.2) (2020-06-22)
 
 
