@@ -76,7 +76,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
     "semantic-release": "^17.0.8",
-    "snyk": "^1.346.0",
+    "snyk": "^1.347.0",
     "ts-node": "8.10.2",
     "tsc-watch": "4.2.8",
     "tsconfig-paths": "3.9.0",
