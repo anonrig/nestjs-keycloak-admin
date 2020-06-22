@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.1...v1.2.2) (2020-06-22)
+
+
+### Bug Fixes
+
+* **resource-enforcer:** make request as any since ts compiler ignores it ([2099d92](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/2099d920c6b9190d4e63867699f23ba3bb72834d))
+
 ## [1.2.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.0...v1.2.1) (2020-06-22)
 
 
