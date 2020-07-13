@@ -11,13 +11,15 @@ export class RequestManager {
     this.client = client
     this.requester = Axios.create({ baseURL })
     this.requester.interceptors.request.use(async (config) => {
-      if (config.headers.authorization) {
+      if (config.headers?.authorization?.length) {
         return config
       }
-
       try {
         const tokenSet = await this.client.refreshGrant()
-        config.headers.authorization = `Bearer ${tokenSet?.access_token}`
+
+        if (tokenSet?.access_token) {
+          config.headers.authorization = `Bearer ${tokenSet?.access_token}`
+        }
       } catch (error) {
         this.logger.warn(`Could not refresh grant on interceptor.`, error)
       }

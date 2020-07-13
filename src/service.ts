@@ -27,19 +27,17 @@ export class KeycloakService {
   public client: AdminClient
 
   constructor(options: KeycloakModuleOptions) {
-    if (!options.config.baseUrl.startsWith('http')) {
+    if (!options.baseUrl.startsWith('http')) {
       throw new Error(`Invalid base url. It should start with either http or https.`)
     }
     this.options = options
-    this.baseUrl = resolve(options.config.baseUrl, `/auth/realms/${options.config.realmName}`)
+    this.baseUrl = resolve(options.baseUrl, `/auth/realms/${options.realmName}`)
 
     const keycloak: any = new KeycloakConnect({}, {
-      resource: this.options.credentials.clientId,
-      realm: this.options.config.realmName,
-      'confidential-port': 0,
-      'ssl-required': 'all',
-      'auth-server-url': resolve(this.options.config.baseUrl, '/auth'),
-      secret: this.options.credentials.clientSecret,
+      resource: this.options.clientId,
+      realm: this.options.realmName,
+      'auth-server-url': resolve(this.options.baseUrl, '/auth'),
+      secret: this.options.clientSecret,
     } as any)
 
     keycloak.accessDenied = (req: any, _res: any, next: any) => {
@@ -48,7 +46,10 @@ export class KeycloakService {
     }
 
     this.connect = keycloak as Keycloak
-    this.client = new AdminClient(this.options.config)
+    this.client = new AdminClient({
+      baseUrl: this.options.baseUrl,
+      realmName: this.options.realmName,
+    })
 
     this.requestManager = new RequestManager(this, this.baseUrl)
   }
@@ -57,7 +58,7 @@ export class KeycloakService {
     if (this.umaConfiguration) {
       return
     }
-    const { clientId, clientSecret } = this.options.credentials
+    const { clientId, clientSecret } = this.options
     const { data } = await this.requestManager.get<UMAConfiguration>(
       '/.well-known/uma2-configuration'
     )
@@ -86,7 +87,7 @@ export class KeycloakService {
     })
 
     if (this.tokenSet.expires_at) {
-      this.logger.log(`Initial token expires at ${this.tokenSet.expires_at}`)
+      this.logger.verbose(`Initial token expires at ${this.tokenSet.expires_at}`)
     }
   }
 
@@ -96,18 +97,18 @@ export class KeycloakService {
     }
 
     if (!this.tokenSet) {
-      this.logger.error(`Token set is missing. Could not refresh grant.`)
+      this.logger.warn(`Missing token set on refreshGrant.`)
       return null
     }
 
     const { refresh_token } = this.tokenSet
 
-    this.logger.verbose(`Grant token expired, refreshing.`)
-
     if (!refresh_token) {
-      this.logger.error(`Could not refresh token. Refresh token is missing.`)
+      this.logger.warn(`Could not refresh token. Refresh token is missing.`)
       return null
     }
+
+    this.logger.verbose(`Refreshing grant token`)
 
     this.tokenSet = await this.issuerClient?.refresh(refresh_token)
 

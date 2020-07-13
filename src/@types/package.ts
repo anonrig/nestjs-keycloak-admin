@@ -9,17 +9,9 @@ export interface KeycloakOptionsFactory {
   createKeycloakOptions(): Promise<KeycloakModuleOptions> | KeycloakModuleOptions
 }
 
-export interface Credentials {
-  clientId: string
-  clientSecret: string
-}
-
-export interface KeycloakConfig {
+export interface KeycloakModuleOptions {
   baseUrl: string
   realmName: string
-}
-
-export interface KeycloakModuleOptions {
-  config: KeycloakConfig
-  credentials: Credentials
+  clientId: string
+  clientSecret: string
 }
