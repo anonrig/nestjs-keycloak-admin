@@ -16,14 +16,10 @@ import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     KeycloakModule.register({
-      config: {
-        baseUrl: '',
-        realmName: ''
-      },
-      credentials: {
-        clientSecret: '',
-        clientId: ''
-      }
+      baseUrl: '',
+      realmName: ''
+      clientSecret: '',
+      clientId: ''
     })
   ],
   controllers: [AppController],
@@ -44,7 +40,7 @@ By default nestjs-keycloak-admin supports User Managed Access for managing your 
 
 ```typescript
 import { Controller, Get, Request, ExecutionContext, Post } from '@nestjs/common';
-import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, DefineResourceEnforcer, UMAResource, Scope} from '../../../dist/main';
+import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, DefineResourceEnforcer, UMAResource, Scope} from 'nestjs-keycloak-admin';
 
 @Controller('/organization')
 @DefineResource('organization')
@@ -63,12 +59,13 @@ export class AppController {
     return req.resources as Resource[]
   }
 
-  @Get('/hello/:id')
-  @DefineScope('read') // this will check organization:read permission
-  @DefineResourceEnforcer({
-    id: (req: any) => req.params.id
+  @Get('/:slug')
+  @DefineScope('read')
+  @EnforceResource({
+    def: ({params}) => params.slug,
+    param: 'slug'
   })
-  findOne(@Request() req: any): Resource {
+  findBySlug(@Request() req: any): Resource {
     return req.resource as Resource
   }
 

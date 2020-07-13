@@ -45,4 +45,12 @@ export class ResourceManager {
     })
     return Promise.all(data.map((id) => this.findById(id)))
   }
+
+  async findByAttribute(key: string, attribute: string): Promise<string[]> {
+    const { data } = await this.requestManager.get<string[]>(`/`, {
+      [key]: attribute,
+    })
+
+    return data
+  }
 }

@@ -6,14 +6,10 @@ import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     KeycloakModule.register({
-      config: {
-        baseUrl: '',
-        realmName: ''
-      },
-      credentials: {
-        clientSecret: '',
-        clientId: ''
-      }
+      baseUrl: '',
+      realmName: '',
+      clientSecret: '',
+      clientId: ''
     })
   ],
   controllers: [AppController],

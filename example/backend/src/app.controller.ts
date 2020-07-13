@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Controller, Get, Request, ExecutionContext, Post } from '@nestjs/common';
-import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, DefineResourceEnforcer, UMAResource, Scope} from '../../../dist/main';
+import { Controller, Get, Request, Post, Inject } from '@nestjs/common';
+import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, UMAResource, Scope, EnforceResource} from '../../../dist/main';
+import { AppService } from './app.service';
 
 @Controller('/organization')
 @DefineResource('organization')
@@ -19,24 +20,11 @@ export class AppController {
     return req.resources as Resource[]
   }
 
-  @Get('/hello/:id')
-  @DefineScope('read') // this will check organization:read permission
-  @DefineResourceEnforcer({
-    id: (req: any) => req.params.id
-  })
-  findOne(@Request() req: any): Resource {
-    return req.resource as Resource
-  }
-
-  @Get('/slug/:slug')
+  @Get('/:slug')
   @DefineScope('read')
-  @DefineResourceEnforcer({
-    id: async (req: any, context: ExecutionContext) => {
-      const cls = context.getClass<AppController>()
-      //do something with it
-      
-      return req.slug
-    }
+  @EnforceResource({
+    def: ({params}) => params.slug,
+    param: 'slug'
   })
   findBySlug(@Request() req: any): Resource {
     return req.resource as Resource

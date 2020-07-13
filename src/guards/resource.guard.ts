@@ -9,8 +9,8 @@ import {
 import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
 import {
-  ResourceDecoratorOptions,
   META_RESOURCE_ENFORCER,
+  EnforceResourceOptions,
 } from '../decorators/resource.enforcer.decorator'
 import { META_SCOPE } from '../decorators/scope.decorator'
 import {
@@ -34,45 +34,68 @@ export class ResourceGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic = this.reflector.get<boolean>(META_PUBLIC, context.getHandler())
+
+    // Emit process, if endpoint is public.
     if (isPublic) {
       return true
     }
 
     const request = context.switchToHttp().getRequest()
-    const resource = this.reflector.get<string>(META_RESOURCE, context.getClass())
+
+    const resourceType = this.reflector.get<string>(META_RESOURCE, context.getClass())
+
+    // If no @DefineScope() decorator is used in handler, it's generated from http method.
     const scope =
       this.reflector.get<string>(META_SCOPE, context.getHandler()) ||
       this.getScopeFromRequestMethod(request)
-    const resourceHandler = this.reflector.get<ResourceDecoratorOptions>(
+
+    const resourceHandler = this.reflector.get<EnforceResourceOptions>(
       META_RESOURCE_ENFORCER,
       context.getHandler()
     )
-    const fetchResources = this.reflector.get<boolean>(META_FETCH_RESOURCES, context.getHandler())
+    const shouldFetchResources = this.reflector.get<boolean>(
+      META_FETCH_RESOURCES,
+      context.getHandler()
+    )
 
-    if (!resource) {
+    // If no resource type is defined as class decorator, emit.
+    if (!resourceType) {
       return true
     }
 
+    // If no access token is defined, probably auth guard failed to load.
     if (!request.accessToken) {
       throw new UnauthorizedException()
     }
 
-    if (fetchResources) {
-      return this.fetchResources(request)
+    // If handler has a @FetchResources() decorator, fetch resources for that resource type.
+    if (shouldFetchResources) {
+      return this.fetchResources(request, resourceType)
     }
 
     let resourceId: string | undefined
 
     try {
       if (resourceHandler) {
-        resourceId = await Promise.resolve(resourceHandler.id(request, context))
+        const urlParam = resourceHandler.def(request)
+        if (resourceHandler.param) {
+          const resource = await this.keycloak.resourceManager.findByAttribute(
+            resourceHandler.param,
+            urlParam
+          )
+          if (resource) {
+            resourceId = resource[0]
+          }
+        } else {
+          resourceId = urlParam
+        }
       }
 
       const response = await this.keycloak.permissionManager.requestTicket({
         token: request.accessToken as string,
-        audience: this.keycloak.options.credentials.clientId,
+        audience: this.keycloak.options.clientId,
         resourceId,
-        scope: scope ? `${resource}:${scope}` : undefined,
+        scope: scope ? `${resourceType}:${scope}` : undefined,
         response_mode: resourceHandler
           ? TicketResponseMode.permissions
           : TicketResponseMode.decision,
@@ -109,11 +132,11 @@ export class ResourceGuard implements CanActivate {
     }
   }
 
-  private async fetchResources(request: any) {
+  private async fetchResources(request: any, resourceType: string) {
     try {
       const response = (await this.keycloak.permissionManager.requestTicket({
         token: request.accessToken as string,
-        audience: this.keycloak.options.credentials.clientId,
+        audience: this.keycloak.options.clientId,
         response_mode: TicketResponseMode.permissions,
       })) as TicketPermissionResponse[]
 
@@ -122,9 +145,10 @@ export class ResourceGuard implements CanActivate {
           this.keycloak.resourceManager.findById(r.rsid)
         )
       )
+
       return true
     } catch (error) {
-      this.logger.error(`Uncaught exception from UMA server`, error)
+      this.logger.error(`Uncaught exception when fetching resources from UMA server`, error)
     }
 
     throw new UnauthorizedException()
