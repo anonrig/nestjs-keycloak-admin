@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.3...v1.3.0) (2020-07-13)
+
+
+### Features
+
+* **resource:** reimplement resource enforcer ([0744bb5](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/0744bb5708603f72a392ee519486423e7b3a89c2))
+
 ## [1.2.3](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.2...v1.2.3) (2020-06-22)
 
 
