@@ -69,20 +69,6 @@ export class AppController {
     return req.resource as Resource
   }
 
-  @Get('/slug/:slug')
-  @DefineScope('read')
-  @DefineResourceEnforcer({
-    id: async (req: any, context: ExecutionContext) => {
-      const cls = context.getClass<AppController>()
-      //do something with it
-      
-      return req.slug
-    }
-  })
-  findBySlug(@Request() req: any): Resource {
-    return req.resource as Resource
-  }
-
   @Post('/')
   @DefineScope('create')
   async create(@Request() req: any): Promise<Resource> {
