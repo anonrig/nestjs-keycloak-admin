@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.3.0...v1.3.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* **dependencies:** bump and analyze dependencies ([477114d](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/477114d57d994b08f960efd7679149252fa34585))
+
 # [1.3.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.2.3...v1.3.0) (2020-07-13)
 
 
