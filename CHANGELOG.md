@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.1...v1.4.2) (2020-09-02)
+
+
+### Bug Fixes
+
+* **build:** fix build system to support module and main packages ([5f6ba89](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/5f6ba89b7d5bfd101173121aa68bfee089cf387b))
+
 ## [1.4.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.0...v1.4.1) (2020-09-02)
 
 
