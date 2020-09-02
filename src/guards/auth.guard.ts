@@ -21,6 +21,10 @@ export class AuthGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
 
+  getRequest(context: ExecutionContext): any {
+    return context.switchToHttp().getRequest()
+  }
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic: boolean = this.reflector.get<boolean>(META_PUBLIC, context.getHandler())
 
@@ -28,7 +32,7 @@ export class AuthGuard implements CanActivate {
       return true
     }
 
-    const request = context.switchToHttp().getRequest()
+    const request = this.getRequest(context)
     const jwt = this.extractJwt(request.headers)
 
     try {
