@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.0...v1.4.1) (2020-09-02)
+
+
+### Bug Fixes
+
+* **package:** change package type to module ([a278427](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/a278427b4c9409cba38941f31a341947d8ddbe98))
+
 # [1.4.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.3.1...v1.4.0) (2020-09-02)
 
 
