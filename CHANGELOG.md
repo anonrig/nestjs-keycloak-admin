@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.3...v1.4.4) (2020-09-02)
+
+
+### Bug Fixes
+
+* **guard:** move getRequest to instance method for overriding ([4d18974](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/4d1897476c8dee12ecabf0f086d5516bb681ef19))
+
 ## [1.4.3](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.2...v1.4.3) (2020-09-02)
 
 
