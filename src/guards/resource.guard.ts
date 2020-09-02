@@ -5,9 +5,7 @@ import {
   UnauthorizedException,
   Logger,
   Inject,
-  ArgumentsHost,
 } from '@nestjs/common'
-import { GqlExecutionContext } from '@nestjs/graphql'
 
 import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
