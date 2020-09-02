@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.3.1...v1.4.0) (2020-09-02)
+
+
+### Bug Fixes
+
+* **guard:** fix resource guard ([efb4e7b](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/efb4e7bde1fb9fd3ca23b578c18054dc26768311))
+* **workflow:** switch to npm ([be5e662](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/be5e66239415507a5d690bac89f5163d853f5ee2))
+
+
+### Features
+
+* **graphql:** add graphql support ([5a7022e](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/5a7022edd9021e9ebeefc250a0914b678241a36b))
+
 ## [1.3.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.3.0...v1.3.1) (2020-08-04)
 
 
