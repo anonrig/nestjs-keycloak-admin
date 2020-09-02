@@ -5,9 +5,9 @@ import {
   UnauthorizedException,
   Logger,
   Inject,
-  ArgumentsHost
+  ArgumentsHost,
 } from '@nestjs/common'
-import { GqlExecutionContext } from '@nestjs/graphql';
+import { GqlExecutionContext } from '@nestjs/graphql'
 
 import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
@@ -24,8 +24,8 @@ import {
 import { META_RESOURCE } from '../decorators/resource.decorator'
 import { META_FETCH_RESOURCES } from '../decorators/fetch.resources.decorator'
 import { META_PUBLIC } from '../decorators/public.decorator'
-import { getRequest } from './execution.request';
-import { PriviledgedRequest } from '../@types/request';
+import { getRequest } from './execution.request'
+import { PriviledgedRequest } from '../@types/request'
 
 @Injectable()
 export class ResourceGuard implements CanActivate {
