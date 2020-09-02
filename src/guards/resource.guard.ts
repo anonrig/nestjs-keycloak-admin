@@ -75,7 +75,7 @@ export class ResourceGuard implements CanActivate {
 
     // If handler has a @FetchResources() decorator, fetch resources for that resource type.
     if (shouldFetchResources) {
-      return this.fetchResources(request, resourceType)
+      return this.fetchResources(request)
     }
 
     let resourceId: string | undefined
