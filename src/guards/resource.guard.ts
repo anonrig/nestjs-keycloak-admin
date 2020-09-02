@@ -5,7 +5,10 @@ import {
   UnauthorizedException,
   Logger,
   Inject,
+  ArgumentsHost
 } from '@nestjs/common'
+import { GqlExecutionContext } from '@nestjs/graphql';
+
 import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
 import {
@@ -21,6 +24,8 @@ import {
 import { META_RESOURCE } from '../decorators/resource.decorator'
 import { META_FETCH_RESOURCES } from '../decorators/fetch.resources.decorator'
 import { META_PUBLIC } from '../decorators/public.decorator'
+import { getRequest } from './execution.request';
+import { PriviledgedRequest } from '../@types/request';
 
 @Injectable()
 export class ResourceGuard implements CanActivate {
@@ -40,7 +45,7 @@ export class ResourceGuard implements CanActivate {
       return true
     }
 
-    const request = context.switchToHttp().getRequest()
+    const request = getRequest(context)
 
     const resourceType = this.reflector.get<string>(META_RESOURCE, context.getClass())
 
@@ -132,7 +137,7 @@ export class ResourceGuard implements CanActivate {
     }
   }
 
-  private async fetchResources(request: any, resourceType: string) {
+  private async fetchResources(request: PriviledgedRequest) {
     try {
       const response = (await this.keycloak.permissionManager.requestTicket({
         token: request.accessToken as string,
