@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.4...v1.4.5) (2020-09-22)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#10](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/10)) ([8c42143](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/8c421431317520fd6aa8af23152601b31fba9340))
+
 ## [1.4.4](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.3...v1.4.4) (2020-09-02)
 
 
