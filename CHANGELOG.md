@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.5...v1.4.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* upgrade axios from 0.20.0 to 0.21.0 ([#12](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/12)) ([8ed0c83](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/8ed0c8302db98b51bd999b6efa14d5eba402d595))
+
 ## [1.4.5](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.4...v1.4.5) (2020-09-22)
 
 
