@@ -45,7 +45,7 @@
     "rxjs": "^6.6.2"
   },
   "dependencies": {
-    "@nestjs/graphql": "^7.7.0",
+    "@nestjs/graphql": "^7.9.0",
     "axios": "^0.21.0",
     "keycloak-admin": "^1.13.0",
     "keycloak-connect": "^11.0.2",
