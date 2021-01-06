@@ -48,7 +48,7 @@
     "@nestjs/graphql": "^7.7.0",
     "axios": "^0.21.0",
     "keycloak-admin": "^1.13.0",
-    "keycloak-connect": "^11.0.2",
+    "keycloak-connect": "^11.0.3",
     "openid-client": "^3.15.10"
   },
   "devDependencies": {
