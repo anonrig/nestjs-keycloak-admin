@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.6...v1.5.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* add missing types for express ([cbaf5d5](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/cbaf5d54c2f18656b41cf4acaefef11043de4e70))
+
+
+### Features
+
+* update and refactor dependencies ([6418100](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/64181008eb7a99481f98cf2425f46c4e4986ce7e))
+
 ## [1.4.6](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.4.5...v1.4.6) (2020-11-25)
 
 
