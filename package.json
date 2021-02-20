@@ -48,7 +48,7 @@
     "axios": "^0.21.1",
     "keycloak-admin": "^1.14.7",
     "keycloak-connect": "^12.0.2",
-    "openid-client": "^4.3.0"
+    "openid-client": "^4.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
