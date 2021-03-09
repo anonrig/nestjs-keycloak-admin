@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.1...v1.5.2) (2021-03-09)
+
+
+### Bug Fixes
+
+* upgrade keycloak-admin from 1.14.7 to 1.14.8 ([#54](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/54)) ([9a90012](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/9a9001213d7a5318738f38579b4584109ac658a8))
+
 ## [1.5.1](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.0...v1.5.1) (2021-03-07)
 
 
