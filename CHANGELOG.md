@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.2...v1.5.3) (2021-03-18)
+
+
+### Bug Fixes
+
+* upgrade keycloak-connect from 12.0.2 to 12.0.3 ([#57](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/57)) ([ea5f9a3](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/ea5f9a35dcc32af5a36d4ba2e602319bf611e45f))
+
 ## [1.5.2](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.1...v1.5.2) (2021-03-09)
 
 
