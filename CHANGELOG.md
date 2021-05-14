@@ -1,3 +1,10 @@
+## [1.5.11](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.10...v1.5.11) (2021-05-14)
+
+
+### Bug Fixes
+
+* upgrade openid-client from 4.6.0 to 4.7.1 ([#77](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/77)) ([4be6a32](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/4be6a320cf460ac7b9b11b13f018617812143da2))
+
 ## [1.5.10](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.9...v1.5.10) (2021-04-27)
 
 
