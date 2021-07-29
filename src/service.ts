@@ -1,5 +1,4 @@
 import { Logger, InternalServerErrorException, Global } from '@nestjs/common'
-import AdminClient from 'keycloak-admin'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
 import { ResourceManager } from './lib/resource-manager'
@@ -24,7 +23,6 @@ export class KeycloakService {
   public connect: Keycloak
   public permissionManager!: PermissionManager
   public resourceManager!: ResourceManager
-  public client: AdminClient
 
   constructor(options: KeycloakModuleOptions) {
     if (!options.baseUrl.startsWith('http')) {
@@ -46,10 +44,6 @@ export class KeycloakService {
     }
 
     this.connect = keycloak as Keycloak
-    this.client = new AdminClient({
-      baseUrl: this.options.baseUrl,
-      realmName: this.options.realmName,
-    })
 
     this.requestManager = new RequestManager(this, this.baseUrl)
   }
@@ -66,12 +60,6 @@ export class KeycloakService {
 
     this.resourceManager = new ResourceManager(this, data.resource_registration_endpoint)
     this.permissionManager = new PermissionManager(this, data.token_endpoint)
-
-    await this.client.auth({
-      clientId,
-      clientSecret,
-      grantType: 'client_credentials',
-    } as any)
 
     const keycloakIssuer = await Issuer.discover(data.issuer)
 
@@ -104,17 +92,19 @@ export class KeycloakService {
     const { refresh_token } = this.tokenSet
 
     if (!refresh_token) {
-      this.logger.warn(`Could not refresh token. Refresh token is missing.`)
-      return null
+      this.logger.log(`Refresh token is missing. Reauthenticating.`)
+
+      const { clientId, clientSecret } = this.options
+      return (this.tokenSet = await this.issuerClient?.grant({
+        clientId,
+        clientSecret,
+        grant_type: 'client_credentials',
+      }))
     }
 
     this.logger.verbose(`Refreshing grant token`)
 
     this.tokenSet = await this.issuerClient?.refresh(refresh_token)
-
-    if (this.tokenSet?.access_token) {
-      this.client.setAccessToken(this.tokenSet.access_token)
-    }
 
     return this.tokenSet
   }
