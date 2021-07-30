@@ -2,7 +2,7 @@
   "name": "nestjs-keycloak-admin",
   "version": "1.5.18",
   "description": "Keycloak Admin Provider for Nest.js",
-  "author": "Yagiz Nizipli <yagiz@relevantfruit.com>",
+  "author": "Yagiz Nizipli <yagiz@nizipli.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
   "main": "dist/main/index.js",
@@ -35,9 +35,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/relevantfruit/nestjs-keycloak-admin"
+    "url": "https://github.com/anonrig/nestjs-keycloak-admin"
   },
-  "bugs": "https://github.com/relevantfruit/nestjs-keycloak-admin",
+  "bugs": "https://github.com/anonrig/nestjs-keycloak-admin",
   "peerDependencies": {
     "@nestjs/common": "^8.0.5",
     "@nestjs/core": "^8.0.5",
