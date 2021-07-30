@@ -1,4 +1,4 @@
-import { Logger, InternalServerErrorException, Global } from '@nestjs/common'
+import { Logger, Global } from '@nestjs/common'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
 import { ResourceManager } from './lib/resource-manager'
@@ -92,17 +92,16 @@ export class KeycloakService {
     const { refresh_token } = this.tokenSet
 
     if (!refresh_token) {
-      this.logger.log(`Refresh token is missing. Reauthenticating.`)
+      this.logger.debug(`Refresh token is missing. Reauthenticating.`)
 
-      const { clientId, clientSecret } = this.options
       return (this.tokenSet = await this.issuerClient?.grant({
-        clientId,
-        clientSecret,
+        clientId: this.options.clientId,
+        clientSecret: this.options.clientSecret,
         grant_type: 'client_credentials',
       }))
     }
 
-    this.logger.verbose(`Refreshing grant token`)
+    this.logger.debug(`Refreshing grant token`)
 
     this.tokenSet = await this.issuerClient?.refresh(refresh_token)
 
