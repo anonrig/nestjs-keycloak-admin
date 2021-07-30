@@ -1,3 +1,10 @@
+## [1.5.19](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.5.18...v1.5.19) (2021-07-30)
+
+
+### Bug Fixes
+
+* update invalid urls on package.json ([7f14b08](https://github.com/anonrig/nestjs-keycloak-admin/commit/7f14b08399961c8b656aa976e3d5fe5767735a41))
+
 ## [1.5.18](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.17...v1.5.18) (2021-07-30)
 
 
