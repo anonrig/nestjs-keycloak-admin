@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.5.19...v1.6.0) (2021-07-30)
+
+
+### Bug Fixes
+
+* update dependencies ([dfc4dab](https://github.com/anonrig/nestjs-keycloak-admin/commit/dfc4dab702e4d654a9fc08135a04dbd4b5150589))
+
+
+### Features
+
+* reintroduce keycloak-admin to service ([#91](https://github.com/anonrig/nestjs-keycloak-admin/issues/91)) ([706b39c](https://github.com/anonrig/nestjs-keycloak-admin/commit/706b39c938d115b7fa0805e7ece43ed2140903c1))
+
 ## [1.5.19](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.5.18...v1.5.19) (2021-07-30)
 
 
