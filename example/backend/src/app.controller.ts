@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Controller, Get, Request, Post, Inject } from '@nestjs/common';
+import { Controller, Get, Request, Post } from '@nestjs/common';
 import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, UMAResource, Scope, EnforceResource} from '../../../dist/main';
-import { AppService } from './app.service';
 
 @Controller('/organization')
 @DefineResource('organization')
