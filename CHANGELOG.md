@@ -1,3 +1,10 @@
+## [1.5.17](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.16...v1.5.17) (2021-07-30)
+
+
+### Bug Fixes
+
+* extend refresh logic with reauth ([#11](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/11), [#76](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/76)) ([#90](https://github.com/relevantfruit/nestjs-keycloak-admin/issues/90)) ([fc4b27d](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/fc4b27dcb246142eda6f50cc9231241465bd243f))
+
 ## [1.5.16](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.15...v1.5.16) (2021-07-17)
 
 
