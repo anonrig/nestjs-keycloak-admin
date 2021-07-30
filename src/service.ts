@@ -1,4 +1,5 @@
 import { Logger, Global } from '@nestjs/common'
+import AdminClient from 'keycloak-admin'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
 import { ResourceManager } from './lib/resource-manager'
@@ -23,6 +24,7 @@ export class KeycloakService {
   public connect: Keycloak
   public permissionManager!: PermissionManager
   public resourceManager!: ResourceManager
+  public client: AdminClient
 
   constructor(options: KeycloakModuleOptions) {
     if (!options.baseUrl.startsWith('http')) {
@@ -44,6 +46,10 @@ export class KeycloakService {
     }
 
     this.connect = keycloak as Keycloak
+    this.client = new AdminClient({
+      baseUrl: this.options.baseUrl,
+      realmName: this.options.realmName,
+    })
 
     this.requestManager = new RequestManager(this, this.baseUrl)
   }
@@ -74,6 +80,8 @@ export class KeycloakService {
       grant_type: 'client_credentials',
     })
 
+    if (this.tokenSet?.access_token) this.client.setAccessToken(this.tokenSet?.access_token)
+
     if (this.tokenSet.expires_at) {
       this.logger.verbose(`Initial token expires at ${this.tokenSet.expires_at}`)
     }
@@ -94,11 +102,14 @@ export class KeycloakService {
     if (!refresh_token) {
       this.logger.debug(`Refresh token is missing. Reauthenticating.`)
 
-      return (this.tokenSet = await this.issuerClient?.grant({
+      this.tokenSet = await this.issuerClient?.grant({
         clientId: this.options.clientId,
         clientSecret: this.options.clientSecret,
         grant_type: 'client_credentials',
-      }))
+      })
+      if (this.tokenSet?.access_token) this.client.setAccessToken(this.tokenSet?.access_token)
+      
+      return this.tokenSet
     }
 
     this.logger.debug(`Refreshing grant token`)
