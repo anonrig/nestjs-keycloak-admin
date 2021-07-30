@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "keycloak-connect": "^14.0.0",
     "keycloak-admin": "^1.14.20",
+    "keycloak-connect": "^15.0.0",
     "openid-client": "^4.7.4"
   },
   "devDependencies": {
