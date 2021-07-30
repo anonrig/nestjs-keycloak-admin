@@ -1,3 +1,11 @@
+## [1.5.18](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.17...v1.5.18) (2021-07-30)
+
+
+### Bug Fixes
+
+* remove keycloak-admin reference ([e13fdac](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/e13fdac06cfdbbc31cc7abdde05fb0a978694c3b))
+* update example project and bump dependencies ([8aa31d4](https://github.com/relevantfruit/nestjs-keycloak-admin/commit/8aa31d4fa93ae06e58ccbb44ab9c9da0bde3edd8))
+
 ## [1.5.17](https://github.com/relevantfruit/nestjs-keycloak-admin/compare/v1.5.16...v1.5.17) (2021-07-30)
 
 
