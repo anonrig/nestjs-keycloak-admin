@@ -47,7 +47,7 @@
   "dependencies": {
     "axios": "^0.21.3",
     "keycloak-admin": "^1.14.20",
-    "keycloak-connect": "^15.0.0",
+    "keycloak-connect": "^15.0.1",
     "openid-client": "^4.7.4"
   },
   "devDependencies": {
