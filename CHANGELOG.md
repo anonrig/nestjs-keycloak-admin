@@ -1,3 +1,13 @@
+## [1.6.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.0...v1.6.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#92](https://github.com/anonrig/nestjs-keycloak-admin/issues/92)) ([5c82f42](https://github.com/anonrig/nestjs-keycloak-admin/commit/5c82f42e661dae52446eb0a71f3ac140be4c5028))
+* upgrade keycloak-admin from 1.14.20 to 1.14.21 ([#93](https://github.com/anonrig/nestjs-keycloak-admin/issues/93)) ([a14b17b](https://github.com/anonrig/nestjs-keycloak-admin/commit/a14b17b6e8d5ab52e91de28b0bb346d807102a65))
+* upgrade keycloak-connect from 15.0.0 to 15.0.1 ([#96](https://github.com/anonrig/nestjs-keycloak-admin/issues/96)) ([3bd5500](https://github.com/anonrig/nestjs-keycloak-admin/commit/3bd55006d19a68327761f58bcf4b3eaefd92b996))
+* upgrade multiple dependencies with Snyk ([#95](https://github.com/anonrig/nestjs-keycloak-admin/issues/95)) ([1eef7d8](https://github.com/anonrig/nestjs-keycloak-admin/commit/1eef7d87bba706b895641f035f5633b8e4e98ffd))
+
 # [1.6.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.5.19...v1.6.0) (2021-07-30)
 
 
