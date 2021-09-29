@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.1...v1.6.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#98](https://github.com/anonrig/nestjs-keycloak-admin/issues/98)) ([a1fd72b](https://github.com/anonrig/nestjs-keycloak-admin/commit/a1fd72bc3be8923726ab95f0da423e25c081dd93))
+
 ## [1.6.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.0...v1.6.1) (2021-09-08)
 
 
