@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.2...v1.6.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* upgrade keycloak-admin from 1.14.21 to 1.14.22 ([#99](https://github.com/anonrig/nestjs-keycloak-admin/issues/99)) ([0d34590](https://github.com/anonrig/nestjs-keycloak-admin/commit/0d34590aaab71c57a29408435ad6c5d602cd1990))
+
 ## [1.6.2](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.1...v1.6.2) (2021-09-29)
 
 
