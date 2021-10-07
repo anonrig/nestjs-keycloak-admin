@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.3...v1.6.4) (2021-10-07)
+
+
+### Bug Fixes
+
+* upgrade openid-client from 4.7.5 to 4.8.0 ([#100](https://github.com/anonrig/nestjs-keycloak-admin/issues/100)) ([fb04b12](https://github.com/anonrig/nestjs-keycloak-admin/commit/fb04b123f4cf6706f32284166ab896b2e2b9f602))
+
 ## [1.6.3](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.2...v1.6.3) (2021-09-29)
 
 
