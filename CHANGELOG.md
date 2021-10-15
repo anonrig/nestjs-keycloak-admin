@@ -1,3 +1,10 @@
+## [1.6.6](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.5...v1.6.6) (2021-10-15)
+
+
+### Bug Fixes
+
+* upgrade @nestjs/core from 8.0.6 to 8.0.7 ([#102](https://github.com/anonrig/nestjs-keycloak-admin/issues/102)) ([8f87e78](https://github.com/anonrig/nestjs-keycloak-admin/commit/8f87e78c8126b11cd84cbcd379ab31c62b3d89ec))
+
 ## [1.6.5](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.4...v1.6.5) (2021-10-12)
 
 
