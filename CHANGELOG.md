@@ -1,3 +1,10 @@
+## [1.6.7](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.6...v1.6.7) (2021-10-16)
+
+
+### Bug Fixes
+
+* handle an edge case where headers is null ([a478acd](https://github.com/anonrig/nestjs-keycloak-admin/commit/a478acd84cfb64e414b42043b189ab5433cae5fc))
+
 ## [1.6.6](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.5...v1.6.6) (2021-10-15)
 
 
