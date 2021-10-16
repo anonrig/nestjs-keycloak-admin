@@ -14,10 +14,11 @@ export class RequestManager {
       if (config.headers?.authorization?.length) {
         return config
       }
+
       try {
         const tokenSet = await this.client.refreshGrant()
 
-        if (tokenSet?.access_token) {
+        if (tokenSet?.access_token && config.headers) {
           config.headers.authorization = `Bearer ${tokenSet?.access_token}`
         }
       } catch (error) {
