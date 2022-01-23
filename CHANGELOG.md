@@ -1,3 +1,11 @@
+## [1.6.9](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.8...v1.6.9) (2022-01-23)
+
+
+### Bug Fixes
+
+* update all dependencies and fix type errors ([0e35448](https://github.com/anonrig/nestjs-keycloak-admin/commit/0e35448fe4c46f44b0630de590f75bd2a9861785))
+* update dependencies after audit ([fed4c4c](https://github.com/anonrig/nestjs-keycloak-admin/commit/fed4c4cd0af0563573740a27256cbbe29df2244c))
+
 ## [1.6.8](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.7...v1.6.8) (2022-01-23)
 
 
