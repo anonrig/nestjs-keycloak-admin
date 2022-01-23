@@ -45,6 +45,7 @@
     "rxjs": "^7.4.0"
   },
   "dependencies": {
+    "@keycloak/keycloak-admin-client": "^16.1.0",
     "axios": "^0.23.0",
     "keycloak-admin": "^1.14.22",
     "keycloak-connect": "^15.0.2",
