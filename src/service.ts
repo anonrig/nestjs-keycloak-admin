@@ -1,5 +1,5 @@
 import { Logger, Global } from '@nestjs/common'
-import AdminClient from 'keycloak-admin'
+import AdminClient from '@keycloak/keycloak-admin-client'
 import { Client, Issuer, TokenSet } from 'openid-client'
 import { resolve } from 'url'
 import { ResourceManager } from './lib/resource-manager'
