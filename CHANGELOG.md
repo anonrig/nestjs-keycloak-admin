@@ -1,3 +1,10 @@
+## [1.6.8](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.7...v1.6.8) (2022-01-23)
+
+
+### Bug Fixes
+
+* correct package-lock version to 2 ([7d5c185](https://github.com/anonrig/nestjs-keycloak-admin/commit/7d5c185d31f74855c2902061b12e64c5af8fdf26))
+
 ## [1.6.7](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.6...v1.6.7) (2021-10-16)
 
 
