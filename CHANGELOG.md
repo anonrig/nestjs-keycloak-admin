@@ -1,3 +1,12 @@
+## [1.6.11](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.10...v1.6.11) (2022-03-02)
+
+
+### Bug Fixes
+
+* upgrade @keycloak/keycloak-admin-client from 16.1.0 to 16.1.1 ([#115](https://github.com/anonrig/nestjs-keycloak-admin/issues/115)) ([bdd1349](https://github.com/anonrig/nestjs-keycloak-admin/commit/bdd1349b7a6b57ff184b89445b1d3014c29ecf18))
+* upgrade keycloak-connect from 16.1.0 to 16.1.1 ([#114](https://github.com/anonrig/nestjs-keycloak-admin/issues/114)) ([36a5655](https://github.com/anonrig/nestjs-keycloak-admin/commit/36a56557d78494dc663424018d4cbdf9b474df61))
+* upgrade rxjs from 7.5.2 to 7.5.4 ([#116](https://github.com/anonrig/nestjs-keycloak-admin/issues/116)) ([f3419d9](https://github.com/anonrig/nestjs-keycloak-admin/commit/f3419d9f49f01d3701d917a21a3c3d10b7e512b4))
+
 ## [1.6.10](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.9...v1.6.10) (2022-02-26)
 
 
