@@ -1,3 +1,10 @@
+## [1.6.12](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.11...v1.6.12) (2022-03-06)
+
+
+### Bug Fixes
+
+* upgrade axios from 0.25.0 to 0.26.0 ([#117](https://github.com/anonrig/nestjs-keycloak-admin/issues/117)) ([ae577b6](https://github.com/anonrig/nestjs-keycloak-admin/commit/ae577b66704df637e224b751d7169fa0d12fa76e))
+
 ## [1.6.11](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.10...v1.6.11) (2022-03-02)
 
 
