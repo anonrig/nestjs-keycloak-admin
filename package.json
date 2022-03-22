@@ -53,8 +53,8 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "@nestjs/common": "^8.3.1",
-    "@nestjs/core": "^8.3.1",
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/core": "^8.4.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
