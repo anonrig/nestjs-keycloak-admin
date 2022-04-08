@@ -15,8 +15,8 @@ import { RoleMatchingMode } from '../constants'
 import KeycloakConnect from 'keycloak-connect'
 
 @Injectable()
-export class Roleuard implements CanActivate {
-  logger = new Logger(Roleuard.name)
+export class RoleGuard implements CanActivate {
+  logger = new Logger(RoleGuard.name)
 
   constructor(
     @Inject(KeycloakService)
@@ -41,7 +41,7 @@ export class Roleuard implements CanActivate {
     const roleDefinition = this.reflector.get<RoleDecoratorOption>(META_ROLES, context.getHandler())
 
     // If no resource type is defined as class decorator, emit.
-    if (!roleDefinition || !roleDefinition?.roles?.length) {
+    if (!roleDefinition?.roles?.length) {
       return true
     }
 
