@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.16...v1.7.0) (2022-04-08)
+
+
+### Bug Fixes
+
+* use correct name for role guard and delete useless condition ([17d1fa6](https://github.com/anonrig/nestjs-keycloak-admin/commit/17d1fa68321ceb71458dc1135cffc13314214d0d))
+
+
+### Features
+
+* add role guard ([6795d05](https://github.com/anonrig/nestjs-keycloak-admin/commit/6795d056a493e06314ab1e0901b49bee96cf2cda))
+
 ## [1.6.16](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.15...v1.6.16) (2022-03-30)
 
 
