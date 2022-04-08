@@ -11,9 +11,11 @@ export * from './decorators/public.decorator'
 export * from './decorators/resource.decorator'
 export * from './decorators/resource.enforcer.decorator'
 export * from './decorators/scope.decorator'
+export * from './decorators/roles.decorator'
 
 export * from './guards/auth.guard'
 export * from './guards/resource.guard'
+export * from './guards/role.guard'
 
 export * from './lib/request-manager'
 export * from './lib/resource-manager'
