@@ -10,7 +10,7 @@ Then on your app.module.ts
 ```typescript
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import KeycloakModule, { AuthGuard, ResourceGuard } from 'nestjs-keycloak-admin'
+import KeycloakModule, { AuthGuard, ResourceGuard, RoleGuard } from 'nestjs-keycloak-admin'
 import { APP_GUARD } from '@nestjs/core';
 
 @Module({
@@ -25,10 +25,14 @@ import { APP_GUARD } from '@nestjs/core';
   controllers: [AppController],
   providers: [
     {
-      provide: APP_GUARD, 
+      provide: APP_GUARD,
       useClass: AuthGuard
     },
     {provide: APP_GUARD, useClass: ResourceGuard},
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard,
+    },
   ],
 })
 export class AppModule {}
@@ -39,8 +43,18 @@ export class AppModule {}
 By default nestjs-keycloak-admin supports User Managed Access for managing your resources.
 
 ```typescript
-import { Controller, Get, Request, ExecutionContext, Post } from '@nestjs/common';
-import {DefineResource, Public, KeycloakService, FetchResources, Resource, DefineScope, DefineResourceEnforcer, UMAResource, Scope} from 'nestjs-keycloak-admin';
+import { Controller, Get, Request, ExecutionContext, Post } from '@nestjs/common'
+import {
+  DefineResource,
+  Public,
+  KeycloakService,
+  FetchResources,
+  Resource,
+  DefineScope,
+  DefineResourceEnforcer,
+  UMAResource,
+  Scope,
+} from 'nestjs-keycloak-admin'
 
 @Controller('/organization')
 @DefineResource('organization')
@@ -62,8 +76,8 @@ export class AppController {
   @Get('/:slug')
   @DefineScope('read')
   @EnforceResource({
-    def: ({params}) => params.slug,
-    param: 'slug'
+    def: ({ params }) => params.slug,
+    param: 'slug',
   })
   findBySlug(@Request() req: any): Resource {
     return req.resource as Resource
@@ -74,7 +88,7 @@ export class AppController {
   async create(@Request() req: any): Promise<Resource> {
     let resource = new Resource({
       name: 'resource',
-      displayName: 'My Resource'
+      displayName: 'My Resource',
     } as UMAResource)
       .setOwner(req.user._id)
       .setScopes([new Scope('organization:read'), new Scope('organization:write')])
@@ -82,14 +96,39 @@ export class AppController {
       .setUris(['/organization/123'])
       .setAttributes({
         valid: true,
-        types: ['customer', 'any']
+        types: ['customer', 'any'],
       })
 
     resource = await this.keycloak.resourceManager.create(resource)
 
     // create organization on your resource server and add link to resource.id, to access it later.
 
-    return resource 
+    return resource
   }
 }
+```
+
+## Decorators
+
+Here is the decorators you can use in your controllers.
+
+| Decorator          | Description                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| @User              | Retrieves the current Keycloak logged-in user. (must be per method, unless controller is request scoped.) |
+| @AccessToken       | Retrieves the current access token. (must be per method, unless controller is request scoped.) |
+| @DefineResource    | Define the keycloak application resource name.                                                            |
+| @DefineScope       | Define the keycloak resource scope (ex: 'create', 'read', 'update', 'delete')                             |
+| @EnforceResource   |                                                                                                           |
+| @FetchResources     |                                                                                                           |
+| @Public            | Allow any user to use the route.                                                                          |
+| @Roles             | Keycloak realm/application roles. Prefix any realm-level roles with "realm:" (i.e realm:admin)            |
+
+```typescript
+
+  @Get('/hello')
+  @Roles({roles: ['realm:admin'], mode: RoleMatchingMode.ANY})
+  sayHello(@User() user: KeycloakUser, @AccessToken() accessToken): string {
+    return `life is short. -${user.email}/${accessToken}`
+  }
+
 ```
