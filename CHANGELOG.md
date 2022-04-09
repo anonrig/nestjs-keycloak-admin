@@ -1,3 +1,12 @@
+## [1.7.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.0...v1.7.1) (2022-04-09)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([30e238d](https://github.com/anonrig/nestjs-keycloak-admin/commit/30e238da8d02ab6af890c512dca982340c1fa53a))
+* upgrade openid-client from 5.1.3 to 5.1.4 ([32ed21f](https://github.com/anonrig/nestjs-keycloak-admin/commit/32ed21fd94e6aaf7bac016bfb2610c87ebee11f1))
+* upgrade rxjs from 7.5.4 to 7.5.5 ([69f00ab](https://github.com/anonrig/nestjs-keycloak-admin/commit/69f00ab729e6c508d1e727aa08cc260d1728d527))
+
 # [1.7.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.6.16...v1.7.0) (2022-04-08)
 
 
