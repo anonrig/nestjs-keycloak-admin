@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.1...v1.7.2) (2022-04-11)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([4b5940e](https://github.com/anonrig/nestjs-keycloak-admin/commit/4b5940e1a165126a7cd98b743dd489b3483f6266))
+
 ## [1.7.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.0...v1.7.1) (2022-04-09)
 
 
