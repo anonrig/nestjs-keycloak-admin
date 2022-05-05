@@ -1,6 +1,6 @@
 {
   "name": "nestjs-keycloak-admin",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Keycloak Admin Provider for Nest.js",
   "author": "Yagiz Nizipli <yagiz@nizipli.com>",
   "license": "MIT",
