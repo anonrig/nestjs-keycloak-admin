@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.5...v1.8.0) (2022-05-22)
+
+
+### Features
+
+* update keycloak to 18 ([f8bea51](https://github.com/anonrig/nestjs-keycloak-admin/commit/f8bea5131a19448f48191d891709e33e6af0d72e))
+
 ## [1.7.5](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.4...v1.7.5) (2022-05-05)
 
 
