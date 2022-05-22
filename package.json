@@ -21,9 +21,8 @@
     "build": "concurrently \"npm run build:module\" \"npm run build:main\"",
     "build:module": "tsc -p tsconfig.json --module ESNext --target ESNext --outDir dist/module",
     "build:main": "tsc -p tsconfig.json --module commonjs  --target ES2017 --outDir dist/main",
-    "prepare": "npm run snyk-protect && npm run build",
+    "prepare": "npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "snyk-protect": "snyk protect",
     "release": "semantic-release"
   },
   "keywords": [
@@ -45,36 +44,34 @@
     "rxjs": "^7.5.2"
   },
   "dependencies": {
-    "@keycloak/keycloak-admin-client": "^16.1.1",
-    "axios": "^0.26.1",
-    "keycloak-connect": "^16.1.1",
-    "openid-client": "^5.1.5"
+    "@keycloak/keycloak-admin-client": "^18.0.0",
+    "axios": "^0.27.2",
+    "keycloak-connect": "^18.0.0",
+    "openid-client": "^5.1.6"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
-    "@nestjs/common": "^8.4.4",
-    "@nestjs/core": "^8.4.4",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "@nestjs/common": "^8.4.5",
+    "@nestjs/core": "^8.4.5",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.2",
-    "@semantic-release/npm": "^9.0.0",
+    "@semantic-release/github": "^8.0.4",
+    "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/express": "^4.17.13",
-    "@types/node": "17.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
-    "concurrently": "^7.0.0",
+    "@types/node": "17.0.35",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "concurrently": "^7.2.0",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "^8.7.0",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^7.0.4",
-    "prettier": "2.5.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "prettier": "2.6.2",
     "rxjs": "^7.5.5",
     "semantic-release": "^19.0.2",
-    "snyk": "^1.834.0",
-    "typescript": "4.5.5"
-  },
-  "snyk": true
+    "typescript": "4.6.4"
+  }
 }
