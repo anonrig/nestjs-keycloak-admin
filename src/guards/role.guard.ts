@@ -13,6 +13,7 @@ import { META_PUBLIC } from '../decorators/public.decorator'
 import { META_ROLES, RoleDecoratorOption } from '../decorators/roles.decorator'
 import { RoleMatchingMode } from '../constants'
 import KeycloakConnect from 'keycloak-connect'
+import { extractRequest } from '../utils/extract-request'
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -24,10 +25,6 @@ export class RoleGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
 
-  getRequest(context: ExecutionContext): any {
-    return context.switchToHttp().getRequest()
-  }
-
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic = this.reflector.get<boolean>(META_PUBLIC, context.getHandler())
 
@@ -36,7 +33,7 @@ export class RoleGuard implements CanActivate {
       return true
     }
 
-    const request = this.getRequest(context)
+    const request = extractRequest(context)
 
     const roleDefinition = this.reflector.get<RoleDecoratorOption>(META_ROLES, context.getHandler())
 
@@ -55,7 +52,7 @@ export class RoleGuard implements CanActivate {
         access_token: request.accessToken,
       })
 
-      const granted = this.isAccessGranted(roleDefinition, grant.access_token);
+      const granted = this.isAccessGranted(roleDefinition, grant.access_token)
 
       granted
         ? this.logger.verbose(`Access granted for role(s).`)
@@ -68,7 +65,10 @@ export class RoleGuard implements CanActivate {
     throw new UnauthorizedException()
   }
 
-  isAccessGranted(roleDefinition: RoleDecoratorOption, accessToken?: KeycloakConnect.Token): boolean {
+  isAccessGranted(
+    roleDefinition: RoleDecoratorOption,
+    accessToken?: KeycloakConnect.Token
+  ): boolean {
     if (roleDefinition.mode == RoleMatchingMode.ANY) {
       return roleDefinition.roles.some((role) => accessToken?.hasRole(role))
     }
