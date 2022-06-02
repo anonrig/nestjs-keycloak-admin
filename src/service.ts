@@ -108,7 +108,7 @@ export class KeycloakService {
         grant_type: 'client_credentials',
       })
       if (this.tokenSet?.access_token) this.client.setAccessToken(this.tokenSet?.access_token)
-      
+
       return this.tokenSet
     }
 
