@@ -45,11 +45,8 @@
   },
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^18.0.0",
-    "@nestjs/apollo": "^10.0.14",
     "@nestjs/graphql": "^10.0.14",
-    "apollo-server-express": "^3.8.1",
     "axios": "^0.27.2",
-    "graphql": "^16.5.0",
     "keycloak-connect": "^18.0.0",
     "openid-client": "^5.1.6",
     "ts-morph": "^15.0.0"
