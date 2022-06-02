@@ -10,6 +10,7 @@ import { KeycloakService } from '../service'
 import { Reflector } from '@nestjs/core'
 import { META_PUBLIC } from '../decorators/public.decorator'
 import { KeycloakUser } from '../@types/user'
+import { extractRequest } from '../utils/extract-request'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -18,12 +19,9 @@ export class AuthGuard implements CanActivate {
   constructor(
     @Inject(KeycloakService)
     private keycloak: KeycloakService,
+    @Inject(Reflector.name)
     private readonly reflector: Reflector
   ) {}
-
-  getRequest(context: ExecutionContext): any {
-    return context.switchToHttp().getRequest()
-  }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic: boolean = this.reflector.get<boolean>(META_PUBLIC, context.getHandler())
@@ -32,7 +30,7 @@ export class AuthGuard implements CanActivate {
       return true
     }
 
-    const request = this.getRequest(context)
+    const request = extractRequest(context)
     const jwt = this.extractJwt(request.headers)
 
     try {
