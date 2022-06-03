@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.0...v1.8.1) (2022-06-03)
+
+
+### Bug Fixes
+
+* remove unnecessary ts-morph ([93f17bc](https://github.com/anonrig/nestjs-keycloak-admin/commit/93f17bcf5bf99681ee65f576e1cbb8361f55e92e))
+
 # [1.8.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.7.5...v1.8.0) (2022-05-22)
 
 
