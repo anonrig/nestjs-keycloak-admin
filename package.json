@@ -70,6 +70,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
+    "graphql": "^16.5.0",
     "husky": "^8.0.1",
     "prettier": "2.6.2",
     "rxjs": "^7.5.5",
