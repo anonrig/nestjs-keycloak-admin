@@ -48,8 +48,7 @@
     "@nestjs/graphql": "^10.0.14",
     "axios": "^0.27.2",
     "keycloak-connect": "^18.0.0",
-    "openid-client": "^5.1.6",
-    "ts-morph": "^15.0.0"
+    "openid-client": "^5.1.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
