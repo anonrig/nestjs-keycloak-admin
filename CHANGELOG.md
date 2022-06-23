@@ -1,3 +1,11 @@
+## [1.8.2](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.1...v1.8.2) (2022-06-23)
+
+
+### Bug Fixes
+
+* upgrade @nestjs/graphql from 10.0.14 to 10.0.15 ([001a41e](https://github.com/anonrig/nestjs-keycloak-admin/commit/001a41ec801bb0ac48a24a6c6b20076e888f1069))
+* upgrade multiple dependencies with Snyk ([f9539db](https://github.com/anonrig/nestjs-keycloak-admin/commit/f9539dbce038772fb79a1fd935f300551f681914))
+
 ## [1.8.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.0...v1.8.1) (2022-06-03)
 
 
