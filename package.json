@@ -44,7 +44,7 @@
     "rxjs": "^7.5.2"
   },
   "dependencies": {
-    "@keycloak/keycloak-admin-client": "^18.0.0",
+    "@keycloak/keycloak-admin-client": "^18.0.2",
     "@nestjs/graphql": "^10.0.15",
     "axios": "^0.27.2",
     "keycloak-connect": "^18.0.2",
