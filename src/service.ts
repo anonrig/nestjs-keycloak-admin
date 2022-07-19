@@ -31,7 +31,7 @@ export class KeycloakService {
       throw new Error(`Invalid base url. It should start with either http or https.`)
     }
     this.options = options
-    this.baseUrl = resolve(options.baseUrl, `/auth/realms/${options.realmName}`)
+    this.baseUrl = resolve(options.baseUrl, `/realms/${options.realmName}`)
 
     const keycloak: any = new KeycloakConnect({}, {
       resource: this.options.clientId,
