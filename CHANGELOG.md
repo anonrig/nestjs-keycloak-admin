@@ -1,3 +1,12 @@
+## [1.8.3](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.2...v1.8.3) (2022-07-19)
+
+
+### Bug Fixes
+
+* update resolve base url path ([449341c](https://github.com/anonrig/nestjs-keycloak-admin/commit/449341c82f07705c257a019dcb135c6feb7eace7))
+* upgrade @keycloak/keycloak-admin-client from 18.0.0 to 18.0.2 ([18cca1a](https://github.com/anonrig/nestjs-keycloak-admin/commit/18cca1a925f23621c57bcfe9cd6b2e15962e3f4c))
+* upgrade keycloak-connect from 18.0.0 to 18.0.2 ([de3fc80](https://github.com/anonrig/nestjs-keycloak-admin/commit/de3fc8031538e1f427e91075ad174ba62d4e717c))
+
 ## [1.8.2](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.1...v1.8.2) (2022-06-23)
 
 
