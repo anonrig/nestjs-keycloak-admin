@@ -36,7 +36,7 @@ export class KeycloakService {
     const keycloak: any = new KeycloakConnect({}, {
       resource: this.options.clientId,
       realm: this.options.realmName,
-      'auth-server-url': resolve(this.options.baseUrl),
+      'auth-server-url': this.options.baseUrl,
       secret: this.options.clientSecret,
     } as any)
 
