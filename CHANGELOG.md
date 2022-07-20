@@ -1,3 +1,11 @@
+## [1.8.5](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.4...v1.8.5) (2022-07-20)
+
+
+### Bug Fixes
+
+* remove unnecessary resolve ([950c3a1](https://github.com/anonrig/nestjs-keycloak-admin/commit/950c3a1f575d365782ccebc7e0649132db0e4846))
+* removed deprecated /auth url path from keycloak config ([4c9f4fc](https://github.com/anonrig/nestjs-keycloak-admin/commit/4c9f4fce9621dac69371d3731bcd27da5c829f06))
+
 ## [1.8.4](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.3...v1.8.4) (2022-07-19)
 
 
