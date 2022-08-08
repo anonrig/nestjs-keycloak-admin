@@ -38,14 +38,14 @@
   },
   "bugs": "https://github.com/anonrig/nestjs-keycloak-admin",
   "peerDependencies": {
-    "@nestjs/common": "^8.2.6",
-    "@nestjs/core": "^8.2.6",
+    "@nestjs/common": "^9.0.8",
+    "@nestjs/core": "^9.0.8",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.2"
   },
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^18.0.2",
-    "@nestjs/graphql": "^10.0.16",
+    "@nestjs/graphql": "^10.0.19",
     "axios": "^0.27.2",
     "keycloak-connect": "^18.0.2",
     "openid-client": "^5.1.8"
@@ -53,8 +53,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "@nestjs/common": "^8.4.7",
-    "@nestjs/core": "^8.4.7",
+    "@nestjs/common": "^9.0.8",
+    "@nestjs/core": "^9.0.8",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
