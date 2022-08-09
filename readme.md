@@ -1,6 +1,6 @@
 ## Keycloak Admin Client for NestJs
 
-Install using `npm i --save nestjs-keycloak-admin` or `yarn add nestjs-keycloak-admin`
+Install using `npm i --save nestjs-keycloak-admin` or `pnpm add nestjs-keycloak-admin`
 
 
 ## Initialize KeycloakModule
@@ -17,22 +17,16 @@ import { APP_GUARD } from '@nestjs/core';
   imports: [
     KeycloakModule.register({
       baseUrl: '',
-      realmName: ''
+      realmName: '',
       clientSecret: '',
       clientId: ''
     })
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard
-    },
-    {provide: APP_GUARD, useClass: ResourceGuard},
-    {
-      provide: APP_GUARD,
-      useClass: RoleGuard,
-    },
+    { provide: APP_GUARD, useClass: AuthGuard },
+    { provide: APP_GUARD, useClass: ResourceGuard },
+    { provide: APP_GUARD, useClass: RoleGuard },
   ],
 })
 export class AppModule {}
@@ -110,25 +104,23 @@ export class AppController {
 
 ## Decorators
 
+```typescript
+@Get('/hello')
+@Roles({roles: ['realm:admin'], mode: RoleMatchingMode.ANY})
+sayHello(@User() user: KeycloakUser, @AccessToken() accessToken): string {
+  return `life is short. -${user.email}/${accessToken}`
+}
+```
+
 Here is the decorators you can use in your controllers.
 
-| Decorator          | Description                                                                                               |
-| ------------------ | --------------------------------------------------------------------------------------------------------- |
-| @User              | Retrieves the current Keycloak logged-in user. (must be per method, unless controller is request scoped.) |
-| @AccessToken       | Retrieves the current access token. (must be per method, unless controller is request scoped.) |
-| @DefineResource    | Define the keycloak application resource name.                                                            |
-| @DefineScope       | Define the keycloak resource scope (ex: 'create', 'read', 'update', 'delete')                             |
-| @EnforceResource   |                                                                                                           |
-| @FetchResources     |                                                                                                           |
-| @Public            | Allow any user to use the route.                                                                          |
-| @Roles             | Keycloak realm/application roles. Prefix any realm-level roles with "realm:" (i.e realm:admin)            |
-
-```typescript
-
-  @Get('/hello')
-  @Roles({roles: ['realm:admin'], mode: RoleMatchingMode.ANY})
-  sayHello(@User() user: KeycloakUser, @AccessToken() accessToken): string {
-    return `life is short. -${user.email}/${accessToken}`
-  }
-
-```
+| Decorator        | Description                                                                                               |
+|------------------|-----------------------------------------------------------------------------------------------------------|
+| @User            | Retrieves the current Keycloak logged-in user. (must be per method, unless controller is request scoped.) |
+| @AccessToken     | Retrieves the current access token. (must be per method, unless controller is request scoped.)            |
+| @DefineResource  | Define the keycloak application resource name.                                                            |
+| @DefineScope     | Define the keycloak resource scope (ex: 'create', 'read', 'update', 'delete')                             |
+| @EnforceResource |                                                                                                           |
+| @FetchResources  |                                                                                                           |
+| @Public          | Allow any user to use the route.                                                                          |
+| @Roles           | Keycloak realm/application roles. Prefix any realm-level roles with "realm:" (i.e realm:admin)            |
