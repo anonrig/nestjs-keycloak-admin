@@ -1,4 +1,4 @@
-import { SetMetadata, CustomDecorator, Type, Provider, Inject } from '@nestjs/common'
+import { SetMetadata, CustomDecorator } from '@nestjs/common'
 
 export const META_RESOURCE_ENFORCER = 'keycloak-resource-enforcer'
 

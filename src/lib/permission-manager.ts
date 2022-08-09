@@ -1,7 +1,6 @@
 import { KeycloakService } from '../service'
 import { RequestManager } from './request-manager'
 import { TicketForm, TicketDecisionResponse, TicketPermissionResponse } from '../@types/uma.ticket'
-import qs from 'querystring'
 
 export class PermissionManager {
   private readonly requestManager: RequestManager
