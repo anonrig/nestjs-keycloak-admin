@@ -1,3 +1,10 @@
+## [1.8.7](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.6...v1.8.7) (2022-08-09)
+
+
+### Bug Fixes
+
+* update readme ([8e82904](https://github.com/anonrig/nestjs-keycloak-admin/commit/8e829040a71d55213c70f0fbadb09e17f8d0b78c))
+
 ## [1.8.6](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.5...v1.8.6) (2022-07-25)
 
 
