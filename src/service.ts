@@ -88,18 +88,15 @@ export class KeycloakService {
   }
 
   async refreshGrant(): Promise<TokenSet | undefined | null> {
-    if (this.tokenSet && !this.tokenSet.expired()) {
+    if (!this.tokenSet) {
+      await this.initialize()
+    }
+
+    if (!this.tokenSet?.expired()) {
       return this.tokenSet
     }
 
-    if (!this.tokenSet) {
-      this.logger.warn(`Missing token set on refreshGrant.`)
-      return null
-    }
-
-    const { refresh_token } = this.tokenSet
-
-    if (!refresh_token) {
+    if (!this.tokenSet.refresh_token) {
       this.logger.debug(`Refresh token is missing. Reauthenticating.`)
 
       this.tokenSet = await this.issuerClient?.grant({
@@ -107,14 +104,16 @@ export class KeycloakService {
         clientSecret: this.options.clientSecret,
         grant_type: 'client_credentials',
       })
-      if (this.tokenSet?.access_token) this.client.setAccessToken(this.tokenSet?.access_token)
+      if (this.tokenSet?.access_token) {
+        this.client.setAccessToken(this.tokenSet?.access_token)
+      }
 
       return this.tokenSet
     }
 
     this.logger.debug(`Refreshing grant token`)
 
-    this.tokenSet = await this.issuerClient?.refresh(refresh_token)
+    this.tokenSet = await this.issuerClient?.refresh(this.tokenSet.refresh_token)
 
     return this.tokenSet
   }
