@@ -1,3 +1,10 @@
+## [1.8.8](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.7...v1.8.8) (2022-08-21)
+
+
+### Bug Fixes
+
+* improve refresh grant flow ([facead4](https://github.com/anonrig/nestjs-keycloak-admin/commit/facead4f254ab6fb131bc43f539c3561cfe40489))
+
 ## [1.8.7](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.6...v1.8.7) (2022-08-09)
 
 
