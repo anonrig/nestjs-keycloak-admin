@@ -44,6 +44,7 @@
     "@keycloak/keycloak-admin-client": "^19.0.1",
     "@nestjs/graphql": "^10.0.21",
     "axios": "^0.27.2",
+    "graphql": "^16.6.0",
     "keycloak-connect": "^19.0.1",
     "openid-client": "^5.1.8"
   },
@@ -66,7 +67,6 @@
     "concurrently": "^7.3.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.21.0",
-    "graphql": "^16.5.0",
     "husky": "^8.0.1",
     "prettier": "2.7.1",
     "rxjs": "^7.5.6",
