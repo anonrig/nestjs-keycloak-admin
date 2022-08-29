@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.8...v2.0.0) (2022-08-29)
+
+
+### Bug Fixes
+
+* remove commonjs distribution due to upstream pkg ([e48f18e](https://github.com/anonrig/nestjs-keycloak-admin/commit/e48f18e46489542c8a63782ced8e7bf9ed18c346))
+
+
+### BREAKING CHANGES
+
+* Remove CJS distribution due to ESM requirement by keycloak-admin-client
+
 ## [1.8.8](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.7...v1.8.8) (2022-08-21)
 
 
