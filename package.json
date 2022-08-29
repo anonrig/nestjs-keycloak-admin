@@ -5,9 +5,9 @@
   "author": "Yagiz Nizipli <yagiz@nizipli.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "main": "dist/main/index.js",
-  "module": "dist/module/index.js",
-  "types": "dist/main/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
     "*.md"
@@ -16,9 +16,7 @@
     "style:check": "eslint src --ext .js,.ts",
     "style": "eslint src --ext .js,.ts --fix",
     "start:dev": "tsc -w",
-    "build": "concurrently \"npm run build:module\" \"npm run build:main\"",
-    "build:module": "tsc -p tsconfig.json --module ESNext --target ESNext --outDir dist/module",
-    "build:main": "tsc -p tsconfig.json --module commonjs  --target ES2017 --outDir dist/main",
+    "build": "tsc",
     "prepare": "npm run build",
     "release": "semantic-release"
   },
@@ -64,7 +62,6 @@
     "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
-    "concurrently": "^7.3.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.21.0",
     "husky": "^8.0.1",

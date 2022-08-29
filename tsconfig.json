@@ -11,8 +11,18 @@
     "incremental": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "target": "ESNext"
   },
-  "include": ["src"],
-  "exclude": [".github", "node_modules", "**/src/**/*.spec.ts", "example", "dist"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    ".github",
+    "node_modules",
+    "**/src/**/*.spec.ts",
+    "example",
+    "dist"
+  ]
 }
