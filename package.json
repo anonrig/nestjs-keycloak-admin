@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^19.0.1",
-    "@nestjs/graphql": "^10.0.21",
+    "@nestjs/graphql": "^10.2.1",
     "axios": "^0.27.2",
     "graphql": "^16.6.0",
     "keycloak-connect": "^19.0.1",
