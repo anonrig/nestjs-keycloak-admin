@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/anonrig/nestjs-keycloak-admin/compare/v2.0.0...v2.0.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* upgrade @keycloak/keycloak-admin-client from 19.0.1 to 19.0.3 ([16d8449](https://github.com/anonrig/nestjs-keycloak-admin/commit/16d8449df04a47e4766c36dffa1d511cd2de4763))
+
 # [2.0.0](https://github.com/anonrig/nestjs-keycloak-admin/compare/v1.8.8...v2.0.0) (2022-08-29)
 
 
